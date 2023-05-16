@@ -6,12 +6,12 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
-      bungee: ["Bungee", "sans-serif"],
+      bree: ['Bree Serif', 'serif'],
     },
 
     colors: {
-      primary: "#16a34a",
-      primaryHover: "#22c55e",
+      primary: "#088395",
+      primaryHover: "#05BFDB",
       noColor: "transparent",
       grayCustom: "rgb(100 116 139)",
       lightRed: "#e6a0db",
@@ -28,6 +28,7 @@ module.exports = {
       purple: colors.purple,
       gray: colors.gray,
       pink: colors.pink,
+      teal: colors.teal,
     },
     extend: {},
   },

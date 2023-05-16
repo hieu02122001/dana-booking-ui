@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Button from "../../components/button/Button";
+import { Button } from '@chakra-ui/react'
 import Field from "../../components/field/Field";
 import Input from "../../components/input/Input";
 import Label from "../../components/label/Label";
@@ -49,7 +49,7 @@ const LoginPage = () => {
         console.log("login success: ", res);
         localStorage.setItem("token", res.data.token);
         setUser(res?.data.customerResponseDto);
-        navigate(-1);
+        navigate("/");
       })
       .catch((err) => {
         console.log("error: ", err);
@@ -65,14 +65,14 @@ const LoginPage = () => {
       <div className="w-[70%] h-[90%] shadow-2xl flex flex-row bg-white">
         <div className="w-[50%] h-[100%] ">
           <img
-            src="https://images.unsplash.com/photo-1500835556837-99ac94a94552?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+            src="https://images.unsplash.com/photo-1643665592005-843f3f6b4ece?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
             alt=""
             className="w-full h-full object-cover"
           />
         </div>
         <div className="w-[50%] h-[100%] flex flex-col px-8 justify-center">
-          <h1 className="font-bungee text-5xl text-center mb-7 text-green-700">
-            AirDnD
+          <h1 className="font-bree text-5xl text-center mb-7 text-teal-700">
+            DANA Booking
           </h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Field>
@@ -104,7 +104,7 @@ const LoginPage = () => {
               )}
             </Field>
             <div className="w-full flex justify-center pb-6">
-              <Button styleClass="w-[100%]">Sign In</Button>
+              <Button colorScheme='teal' type="submit">Sign In</Button>
             </div>
           </form>
           <div className="text-sm flex justify-center text-grayCustom">
