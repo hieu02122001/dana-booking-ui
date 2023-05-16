@@ -22,7 +22,7 @@ const LoginPage = () => {
         .required("Please enter your email address"),
       password: yup
         .string()
-        .min(2, "Your password must be at least 8 characters or greater")
+        .min(6, "Your password must be at least 6 characters or greater")
         .required("Please enter your password"),
     })
     .required();
@@ -44,7 +44,7 @@ const LoginPage = () => {
 
   function login(value) {
     http
-      .post("auth/login", value)
+      .post("/users/admin/login", value)
       .then((res) => {
         console.log("login success: ", res);
         localStorage.setItem("token", res.data.token);
