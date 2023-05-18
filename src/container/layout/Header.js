@@ -51,7 +51,7 @@ const Header = () => {
         onClick={() => clickCoworkingSpace()}
       >
         <img src="/logo.png" alt="" className="w-full h-full object-cover" />
-        <div className="">AirDnD</div>
+        <div className="">DANA Booking</div>
       </div>
       <div className="flex flex-row gap-4 justify-center items-center mr-10">
         {items.map((item) => (
