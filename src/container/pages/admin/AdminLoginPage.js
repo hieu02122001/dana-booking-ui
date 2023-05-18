@@ -48,7 +48,7 @@ const AdminLoginPage = () => {
       .then((res) => {
         console.log("login success: ", res);
         localStorage.setItem("token", res.data.token);
-        setUser(res?.data.customerResponseDto);
+        setUser(res?.data.user);
         navigate("/admin/users");
       })
       .catch((err) => {
