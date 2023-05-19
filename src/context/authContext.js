@@ -6,18 +6,18 @@ const AuthContext = createContext();
 const AuthProvider = (props) => {
   const [user, setUser] = useState({
     id: "",
-    customerName: "",
+    fullName: "",
     email: "",
-    phoneNumber: "",
-    roleName: "",
-    timeCreate: "",
-    timeUpdate: "",
+    phone: "",
+    userType: "",
+    createdAt: "",
+    updatedAt: "",
   });
   const value = { user, setUser };
 
   useEffect(() => {
     http
-      .get("/customers/me")
+      .get("/me")
       .then((res) => {
         setUser(res.data);
       })
