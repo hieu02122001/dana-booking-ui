@@ -7,6 +7,7 @@ export const PATHS = {
   adminLogin: "/admin/login",
   adminRegister: "/admin/register",
   adminUsers: "/admin/users",
+  adminAddUsers: "/admin/users/add",
   adminHouses: "/admin/houses",
   adminSubscriptions: "/admin/subscriptions",
   // LANDLORD

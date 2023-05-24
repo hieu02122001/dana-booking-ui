@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Table from "../../../components/table/Table";
-import { Heading } from "@chakra-ui/react";
+import { Button, Heading } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import http from "../../../config/axiosConfig";
 import { PATHS } from "../../../utils/paths";
 import { toast } from "react-toastify";
+import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 
 const AdminUserPage = () => {
   const navigate = useNavigate();
@@ -81,18 +82,39 @@ const AdminUserPage = () => {
     "Updated Date",
   ];
   return (
-    <>
-      <Heading size="lg" fontSize="2rem" color="teal.600" textAlign="center">
-        Landlord Management
-      </Heading>
-      <Table
-        head={head}
-        data={userList}
-        page={page}
-        handleDelete={handleDelete}
-        isLoading={isLoading}
-      ></Table>
-    </>
+    <div className="w-full px-5 pt-8">
+      <div className="flex flex-row justify-between">
+        <h1 className="font-semibold text-primary text-2xl">
+          Landlords Management
+        </h1>
+        <Button onClick={() => navigate(PATHS.adminAddUsers)} className="ml-auto" colorScheme="teal" variant="outline">
+          + Landlord
+        </Button>
+      </div>
+      <div className="w-full h-full max-w-[1400px]">
+        <div className="mb-3 flex">
+          <input
+            type="text"
+            className="px-4 py-2 border border-primary rounded-lg outline-none"
+            placeholder="Search name, email, phone"
+            value={search}
+            onChange={handleSearch}
+          />
+        </div>
+        <Table
+          head={head}
+          data={userList}
+          page={page}
+          handleDelete={handleDelete}
+          isLoading={isLoading}
+        ></Table>
+        <div className="flex flex-row gap-4 justify-end text-xl items-center mt-4">
+          <BiLeftArrow className="cursor-pointer" onClick={previousPage} />
+          <span>{page}</span>
+          <BiRightArrow className="cursor-pointer" onClick={nextPage} />
+        </div>
+      </div>
+    </div>
   );
 };
 
