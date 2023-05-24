@@ -4,6 +4,8 @@ import { AuthProvider } from "./context/authContext";
 import AdminLayout from "./container/layout/admin/AdminLayout";
 import AdminLoginPage from "./container/pages/admin/AdminLoginPage";
 import AdminUserPage from "./container/pages/admin/AdminUserPage";
+import AdminHousePage from "./container/pages/admin/AdminHousePage";
+import AdminSubsPage from "./container/pages/admin/AdminSubsPage";
 /// LANDLORD
 import LandlordLoginPage from "./container/pages/landlord/LandlordLoginPage";
 
@@ -18,6 +20,8 @@ function App() {
       <Routes>
         <Route path={PATHS.adminBase} element={<AdminLayout />}>
           <Route path={PATHS.adminUsers} element={<AdminUserPage />}></Route>
+          <Route path={PATHS.adminHouses} element={<AdminHousePage />}></Route>
+          <Route path={PATHS.adminSubscriptions} element={<AdminSubsPage />}></Route>
         </Route>
         <Route path={PATHS.adminLogin} element={<AdminLoginPage />}></Route>
         <Route
