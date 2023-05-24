@@ -1,10 +1,10 @@
 import React from "react";
 
-const Button = ({ children, onClick, styleClass, isLoading = false }) => {
+const Button = ({ children, onClick, bg="bg-primary", isLoading = false }) => {
   return (
     <>
       <button
-        className={`px-5 py-3 bg-primary text-white rounded-lg shadow-lg hover:bg-primaryHover hover:-translate-y-[1px] hover:shadow-2xl ${styleClass}`}
+        className={`px-5 py-3 ${bg} text-white rounded-lg shadow-lg hover:-translate-y-[1px] hover:shadow-2xl`}
         onClick={onClick}
         disabled={isLoading}
       >

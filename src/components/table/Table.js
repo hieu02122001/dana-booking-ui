@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { TbEdit, TbTrashXFilled } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
 
@@ -55,13 +55,16 @@ const Table = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
                     <td>
                       <div className="flex flex-row w-full justify-end gap-2 mt-auto">
                         <Button
-                          styleClass="bg-secondary"
+                          bg="bg-cyan-400"
                           onClick={() => navigate(`${linkTo}${item.id}`)}
                         >
-                          <AiOutlineEdit />
+                          <TbEdit />
                         </Button>
-                        <Button onClick={() => handleDelete(item.id)}>
-                          <AiOutlineDelete />
+                        <Button
+                          bg="bg-red-500"
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          <TbTrashXFilled />
                         </Button>
                       </div>
                     </td>
