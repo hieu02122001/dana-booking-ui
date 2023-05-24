@@ -24,7 +24,7 @@ const AdminUserPage = () => {
     let userType = "LANDLORD";
     setIsLoading(true);
     http
-      .get(`${PATHS.adminUsers}?userType=${userType}`)
+      .get(`${PATHS.adminUsers}?userType=${userType}&&page=${page}&&search=${search}`)
       .then((res) => {
         console.log(res.data);
         const list = res?.data?.rows?.map((item) => {
@@ -41,7 +41,7 @@ const AdminUserPage = () => {
         });
         setUserList(list);
         console.log(userList);
-        setPageCount(Math.ceil(res?.data?.count / 10));
+        setPageCount(Math.ceil(res?.data?.count / 6));
         setIsLoading(false);
       })
       .catch((err) => {
