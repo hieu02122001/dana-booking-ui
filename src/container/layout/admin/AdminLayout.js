@@ -12,7 +12,6 @@ const AdminLayout = () => {
           <Outlet />
         </AdminSidebarWithHeader>
       </div>
-      <Footer />
     </div>
   );
 };
