@@ -18,6 +18,9 @@ const AdminUserPage = () => {
   const [search, setSearch] = useState("");
   //
   const getUserList = () => {
+    if (!localStorage.token) {
+      navigate(PATHS.adminLogin);
+    }
     let userType = "LANDLORD";
     setIsLoading(true);
     http
@@ -92,10 +95,10 @@ const AdminUserPage = () => {
         </Button>
       </div>
       <div className="w-full h-full max-w-[1400px]">
-        <div className="mb-3 flex">
+        <div className="mb-3 flex max-w-[250px]">
           <input
             type="text"
-            className="px-4 py-2 border border-primary rounded-lg outline-none"
+            className="px-4 py-2 border border-primary rounded-lg outline-none w-full"
             placeholder="Search name, email, phone"
             value={search}
             onChange={handleSearch}

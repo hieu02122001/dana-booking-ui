@@ -30,7 +30,7 @@ import {
 } from "react-icons/fi";
 import { PATHS } from "../../../utils/paths";
 import { useAuth } from "../../../context/authContext";
-import { redirect } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const LinkItems = [
   { name: "Landlord", icon: FiUsers, url: PATHS.adminUsers },
@@ -41,7 +41,12 @@ const LinkItems = [
 export default function AdminSidebarWithHeader({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box minH="100vh" h='100%' w='100%' bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box
+      minH="100vh"
+      h="100%"
+      w="100%"
+      bg={useColorModeValue("gray.100", "gray.900")}
+    >
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
@@ -81,14 +86,23 @@ const SidebarContent = ({ onClose, ...rest }) => {
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text
-          className="text-teal-700"
-          fontSize="2xl"
-          fontFamily="monospace"
-          fontWeight="bold"
-        >
-          DANA Booking
-        </Text>
+        <HStack>
+          <div className="w-[50px] h-[50px] min-w-[50px]">
+            <img
+              className="w-full h-full rounded-full"
+              alt=""
+              src="/logo.png"
+            />
+          </div>
+          <Text
+            className="text-teal-700"
+            fontSize="2xl"
+            fontFamily="monospace"
+            fontWeight="bold"
+          >
+            DANA Booking
+          </Text>
+        </HStack>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
@@ -137,7 +151,15 @@ const NavItem = ({ icon, to, children, ...rest }) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }) => {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
+  const navigate = useNavigate();
+  const signOutClickHandle = function () {
+    localStorage.removeItem("token");
+    setUser({
+      id: "",
+    });
+    navigate(PATHS.adminLogin);
+  };
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -208,9 +230,11 @@ const MobileNav = ({ onOpen, ...rest }) => {
               bg={useColorModeValue("white", "gray.900")}
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
-              <MenuItem><Link href={PATHS.adminProfile}>Profile</Link></MenuItem>
+              <MenuItem>
+                <NavLink to={PATHS.adminProfile}>Profile</NavLink>
+              </MenuItem>
               <MenuDivider />
-              <MenuItem><Link href={PATHS.adminLogin}>Sign out</Link></MenuItem>
+              <MenuItem onClick={signOutClickHandle}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
