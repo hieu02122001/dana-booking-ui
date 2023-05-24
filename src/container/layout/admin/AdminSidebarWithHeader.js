@@ -29,10 +29,11 @@ import {
   FiFolder,
 } from "react-icons/fi";
 import { PATHS } from "../../../utils/paths";
-import { NavLink } from "react-router-dom";
+import { useAuth } from "../../../context/authContext";
+import { redirect } from "react-router-dom";
 
 const LinkItems = [
-  { name: "User", icon: FiUsers, url: PATHS.adminUsers },
+  { name: "Landlord", icon: FiUsers, url: PATHS.adminUsers },
   { name: "House", icon: FiHome, url: PATHS.adminHouses },
   { name: "Subscription", icon: FiFolder, url: PATHS.adminSubscriptions },
 ];
@@ -40,7 +41,7 @@ const LinkItems = [
 export default function AdminSidebarWithHeader({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box minH="100vh" h='100%' w='100%' bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
@@ -136,6 +137,7 @@ const NavItem = ({ icon, to, children, ...rest }) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }) => {
+  const { user } = useAuth();
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -192,9 +194,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">{user.fullName}</Text>
                   <Text fontSize="xs" color="gray.600">
-                    Admin
+                    {user.userType}
                   </Text>
                 </VStack>
                 <Box display={{ base: "none", md: "flex" }}>
@@ -206,9 +208,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
               bg={useColorModeValue("white", "gray.900")}
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
-              <MenuItem>Profile</MenuItem>
+              <MenuItem><Link href={PATHS.adminProfile}>Profile</Link></MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem><Link href={PATHS.adminLogin}>Sign out</Link></MenuItem>
             </MenuList>
           </Menu>
         </Flex>
