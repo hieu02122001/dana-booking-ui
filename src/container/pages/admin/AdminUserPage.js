@@ -7,7 +7,7 @@ import http from "../../../config/axiosConfig";
 import { PATHS } from "../../../utils/paths";
 import { toast } from "react-toastify";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
-
+import { AiOutlineUserAdd, AiOutlineSearch } from "react-icons/ai";
 const AdminUserPage = () => {
   const navigate = useNavigate();
   const [userList, setUserList] = useState([]);
@@ -90,8 +90,8 @@ const AdminUserPage = () => {
         <h1 className="font-semibold text-primary text-2xl">
           Landlords Management
         </h1>
-        <Button onClick={() => navigate(PATHS.adminAddUsers)} className="ml-auto" colorScheme="teal" variant="outline">
-          + Landlord
+        <Button leftIcon={<AiOutlineUserAdd />} onClick={() => navigate(PATHS.adminAddUsers)} className="ml-auto" colorScheme="green" variant="outline">
+          Landlord
         </Button>
       </div>
       <div className="w-full h-full max-w-[1400px]">

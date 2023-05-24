@@ -44,7 +44,7 @@ const AdminLoginPage = () => {
 
   function login(value) {
     http
-      .post("/users/admin/login", value)
+      .post("/admin/users/login", value)
       .then((res) => {
         console.log("login success: ", res);
         localStorage.setItem("token", res.data.token);
