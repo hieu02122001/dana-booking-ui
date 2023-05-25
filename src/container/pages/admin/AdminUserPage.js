@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Table from "../../../components/table/Table";
-import { Button, Heading } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import http from "../../../config/axiosConfig";
 import { PATHS } from "../../../utils/paths";
 import { toast } from "react-toastify";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
-import { AiOutlineUserAdd, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineUserAdd } from "react-icons/ai";
 const AdminUserPage = () => {
   const navigate = useNavigate();
   const [userList, setUserList] = useState([]);
@@ -56,7 +56,7 @@ const AdminUserPage = () => {
   const handleDelete = (id) => {
     http.delete(`${PATHS.adminUsers}/${id}`).then((res) => {
       if (res.status === 200) {
-        toast.success("delete success");
+        toast.success("Delete successfully");
         getUserList();
       }
     });

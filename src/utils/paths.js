@@ -9,6 +9,7 @@ export const PATHS = {
   adminUsers: "/admin/users",
   adminAddUsers: "/admin/users/add",
   adminHouses: "/admin/houses",
+  adminAddHouses: "/admin/houses/add",
   adminSubscriptions: "/admin/subscriptions",
   // LANDLORD
   landlordProfile: "/landlord/me",
