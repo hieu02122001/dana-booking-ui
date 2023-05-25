@@ -21,17 +21,16 @@ const AdminUserPage = () => {
     if (!localStorage.token) {
       navigate(PATHS.adminLogin);
     }
-    let userType = "LANDLORD";
     setIsLoading(true);
     http
-      .get(`${PATHS.adminUsers}?userType=${userType}&&page=${page}&&search=${search}`)
+      .get(`${PATHS.adminUsers}?page=${page}&&search=${search}`)
       .then((res) => {
         console.log(res.data);
         const list = res?.data?.rows?.map((item) => {
           const users = {
             id: item.id,
             fullName: item.fullName,
-            housesCount: item.housesCount ? item.housesCount : 0,
+            housesCount: item.houses ? item.houses.length : 0,
             email: item.email,
             phone: item.phone,
             createdAt: item.createdAt,

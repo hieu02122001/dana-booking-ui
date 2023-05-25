@@ -59,13 +59,11 @@ const AdminAddUserPage = () => {
   }, [errors]);
   //
   const onSubmit = async (values) => {
-    let userType = "LANDLORD";
     const userObj = {
       fullName: values.fullName,
       email: values.email,
       phone: values.phone,
       password: values.password,
-      userType,
     };
     setIsLoading(true);
     await http
