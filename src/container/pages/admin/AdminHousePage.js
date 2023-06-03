@@ -31,7 +31,7 @@ const AdminHousePage = () => {
           const houses = {
             id: item.id,
             name: item.name,
-            owner: item.owner ? item.owner.fullName : "(None)",
+            ownerEmail: item.owner ? item.owner.email : "(None)",
             district: item.district ? item.district.name : "(None)",
             address: item.address,
             isActivated: item.isActivated ? "Yes" : "No",
@@ -78,7 +78,7 @@ const AdminHousePage = () => {
   //
   const head = [
     "Name",
-    "Owner",
+    "Owner's Email",
     "District",
     "Address",
     "Activated",
