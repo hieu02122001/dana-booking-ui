@@ -1,6 +1,9 @@
 export const baseURL = "http://localhost:4000/api";
 
 export const PATHS = {
+  // FILTER
+  filterDistrict: "/filter/districts",
+  filterLandlord: "/filter/landlords",
   // ADMIN
   adminProfile: "/admin/me",
   adminBase: "/admin",
