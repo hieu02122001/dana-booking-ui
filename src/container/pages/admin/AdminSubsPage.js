@@ -70,7 +70,7 @@ const AdminSubsPage = () => {
     "Package",
     "Begin Date",
     "End Date",
-    "Total Price",
+    "Total Price (VND)",
     "Status",
     "Created Date",
     "Updated Date",

@@ -38,14 +38,18 @@ const Table = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
                       .map((value, i) => {
                         return (
                           <td key={i}>
-                            {value === "CANCELLED" ? (
+                            {value === "CANCELED" ? (
                               <span style={{ color: "#d75a64" }}>{value}</span>
-                            ) : value === "APPROVED" ? (
-                              <span style={{ color: "#039487" }}>{value}</span>
-                            ) : value === "PENDING" ? (
-                              <span style={{ color: "#6a5af9" }}>{value}</span>
+                            ) : value === "DRAFT" ? (
+                              <span style={{ color: "#BDCDD6" }}>{value}</span>
+                            ) : value === "RUNNING" ? (
+                              <span style={{ color: "#16FF00" }}>{value}</span>
+                            ) : value === "READY" ? (
+                              <span style={{ color: "#2192FF" }}>{value}</span>
                             ) : value === "PAYING" ? (
                               <span style={{ color: "#fece04" }}>{value}</span>
+                            ) : value === "DONE" ? (
+                              <span style={{ color: "#A149FA" }}>{value}</span>
                             ) : (
                               <span>{value}</span>
                             )}
