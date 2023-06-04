@@ -14,6 +14,7 @@ export const PATHS = {
   adminHouses: "/admin/houses",
   adminAddHouses: "/admin/houses/add",
   adminSubscriptions: "/admin/subscriptions",
+  adminAddSubscriptions: "/admin/subscriptions/add",
   // LANDLORD
   landlordProfile: "/landlord/me",
   landlordBase: "/landlord",
