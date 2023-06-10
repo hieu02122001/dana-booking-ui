@@ -126,7 +126,7 @@ const AdminAddHousePage = () => {
         <Field>
           <Label htmlFor="userId">Owner</Label>
           <Dropdown>
-            <Select placeholder={ownerEmail || "Email of the Owner"}></Select>
+            <Select placeholder={ownerEmail || "Choose an Email"}></Select>
             <List>
               {landlords?.map((item) => (
                 <Option key={item.id} onClick={() => handleLandlordSelect(item)}>{item.email}</Option>
