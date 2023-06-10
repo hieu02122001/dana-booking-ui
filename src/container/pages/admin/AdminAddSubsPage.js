@@ -38,14 +38,6 @@ const AdminAddSubsPage = () => {
         console.log(err);
       });
     http
-      .get(`filter/houses`)
-      .then((res) => {
-        setHouses(res.data?.rows);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    http
       .get("packages")
       .then((res) => {
         setPackages(res.data?.rows);
@@ -55,7 +47,19 @@ const AdminAddSubsPage = () => {
       });
   }, []);
   const handleClickLandlordEmail = (item) => {
+    setIsLoading(true);
+    http
+      .get(`${PATHS.adminHouses}?userId=${item.id}`)
+      .then((res) => {
+        setHouses(res.data?.rows);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
     setLandlordEmailSelect(item.email);
+    setHouseSelect();
     setValue({
       ...value,
       userId: item.id,
