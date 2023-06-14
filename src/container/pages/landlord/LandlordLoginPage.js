@@ -10,6 +10,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import http from "../../../config/axiosConfig";
 import { toast } from "react-toastify";
 import { useAuth } from "../../../context/authContext";
+import { PATHS } from "../../../utils/paths";
 
 const LandlordLoginPage = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const LandlordLoginPage = () => {
         console.log("login success: ", res);
         localStorage.setItem("token", res.data.token);
         setUser(res?.data.user);
-        navigate("/");
+        navigate(PATHS.landlordHouses);
       })
       .catch((err) => {
         console.log("error: ", err);
