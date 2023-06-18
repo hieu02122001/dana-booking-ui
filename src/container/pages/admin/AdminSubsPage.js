@@ -65,21 +65,21 @@ const AdminSubsPage = () => {
   }, [page, user]);
   //
   const head = [
-    "House's Name",
-    "Landlord's Email",
-    "Package",
-    "Begin Date",
-    "End Date",
-    "Total Price (VND)",
-    "Status",
-    "Created Date",
-    "Updated Date",
+    "Tên Nhà trọ",
+    "Email chủ trọ",
+    "Gói",
+    "Ngày bắt đầu",
+    "Ngày kết thúc",
+    "Tổng tiền (VND)",
+    "Trạng thái",
+    "Ngày tạo",
+    "Ngày cập nhật",
   ];
   return (
     <div className="w-full px-5 pt-8">
       <div className="flex flex-row justify-between">
         <h1 className="font-semibold text-primary text-2xl">
-          Subscriptions Management
+          QUẢN LÝ ĐĂNG KÝ DỊCH VỤ
         </h1>
         <Button
           leftIcon={<AiFillFolderAdd />}
@@ -88,7 +88,7 @@ const AdminSubsPage = () => {
           colorScheme="green"
           variant="outline"
         >
-          Subscription
+          Thêm
         </Button>
       </div>
       <div className="w-full h-full max-w-[1400px]">

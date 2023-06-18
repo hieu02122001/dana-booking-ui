@@ -57,7 +57,7 @@ const AdminHousePage = () => {
   const handleDelete = (id) => {
     http.delete(`${PATHS.adminHouses}/${id}`).then((res) => {
       if (res.status === 200) {
-        toast.success("Delete successfully");
+        toast.success("Xoá thành công");
         getHouseList();
       }
     });
@@ -77,19 +77,19 @@ const AdminHousePage = () => {
   }, [page, user, search]);
   //
   const head = [
-    "Name",
-    "Owner's Email",
-    "District",
-    "Address",
-    "Activated",
-    "Created Date",
-    "Updated Date",
+    "Tên",
+    "Email chủ trọ",
+    "Quận",
+    "Địa chỉ",
+    "Kích hoạt",
+    "Ngày tạo",
+    "Ngày cập nhật",
   ];
   return (
     <div className="w-full px-5 pt-8">
       <div className="flex flex-row justify-between">
         <h1 className="font-semibold text-primary text-2xl">
-          Houses Management
+          QUẢN LÝ NHÀ TRỌ
         </h1>
         <Button
           leftIcon={<BsFillHouseAddFill />}
@@ -98,7 +98,7 @@ const AdminHousePage = () => {
           colorScheme="green"
           variant="outline"
         >
-          House
+          Thêm
         </Button>
       </div>
       <div className="w-full h-full max-w-[1400px]">
@@ -106,7 +106,7 @@ const AdminHousePage = () => {
           <input
             type="text"
             className="px-4 py-2 border border-primary rounded-lg outline-none w-full"
-            placeholder="Search House's Name"
+            placeholder="Tìm kiếm tên nhà trọ"
             value={search}
             onChange={handleSearch}
           />

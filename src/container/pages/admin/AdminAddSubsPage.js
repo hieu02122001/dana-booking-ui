@@ -105,12 +105,12 @@ const AdminAddSubsPage = () => {
 
   return (
     <div className="p-8 w-full">
-      <h1 className="font-bold text-2xl text-primary">ADD NEW SUBSCRIPTION</h1>
+      <h1 className="font-bold text-2xl text-primary">THÊM ĐĂNG KÝ DỊCH VỤ MỚI</h1>
       <div className="w-full mt-8 max-w-[500px] mb-10">
       <Field>
-          <Label>Landlord's Email</Label>
+          <Label>Email của Chủ trọ:</Label>
           <Dropdown>
-            <Select placeholder={landlordEmailSelect || "Choose an Email"}></Select>
+            <Select placeholder={landlordEmailSelect || "Chọn một Email"}></Select>
             <List>
               {landlords.length > 0 &&
                 landlords.map((item) => (
@@ -125,9 +125,9 @@ const AdminAddSubsPage = () => {
           </Dropdown>
         </Field>
         <Field>
-          <Label>House</Label>
+          <Label>Nhà trọ:</Label>
           <Dropdown>
-            <Select placeholder={houseSelect || "Choose a House"}></Select>
+            <Select placeholder={houseSelect || "Chọn một Nhà trọ"}></Select>
             <List>
               {houses.length > 0 &&
                 houses.map((item) => (
@@ -142,9 +142,9 @@ const AdminAddSubsPage = () => {
           </Dropdown>
         </Field>
         <Field>
-          <Label>Package</Label>
+          <Label>Gói:</Label>
           <Dropdown>
-            <Select placeholder={packagesSelect || "Package"}></Select>
+            <Select placeholder={packagesSelect || "Chọn một Gói"}></Select>
             <List>
               {packages.length > 0 &&
                 packages.map((item) => (
@@ -152,7 +152,7 @@ const AdminAddSubsPage = () => {
                     key={item._id}
                     onClick={() => handleClickPackage(item)}
                   >
-                    {`${item.name}  -  ${item.months} months`}
+                    {`${item.name}  -  ${item.months} Tháng`}
                   </Option>
                 ))}
             </List>
@@ -164,7 +164,7 @@ const AdminAddSubsPage = () => {
           <div className="flex flex-col gap-2">
             {totalPrice && (
               <div>
-                <span className="font-semibold">Total price: </span>
+                <span className="font-semibold">Tổng tiền: </span>
                 {totalPrice}
               </div>
             )}
@@ -172,7 +172,7 @@ const AdminAddSubsPage = () => {
         )}
       </div>
       <Button onClick={handleSubmit} isLoading={isLoading}>
-        Submit
+        Xác nhận
       </Button>
     </div>
   );

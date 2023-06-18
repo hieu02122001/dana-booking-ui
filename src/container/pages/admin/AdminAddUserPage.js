@@ -13,20 +13,20 @@ import Input from "../../../components/input/Input";
 import { Button } from "@chakra-ui/react";
 
 const schema = yup.object({
-  fullName: yup.string().required("Please enter your Full name"),
+  fullName: yup.string().required("Hãy nhập TÊN Chủ trọ"),
   email: yup
     .string()
-    .email("Please enter valid Email address")
-    .required("Please enter your Email"),
+    .email("Hãy nhập Địa chỉ email hợp lệ")
+    .required("Hãy nhập Địa chỉ email"),
   phone: yup
     .string()
-    .required("Please enter your phone Number")
-    .matches(/^\d+$/, "Phone must be Number"),
+    .required("Hãy nhập Số điện thoại")
+    .matches(/^\d+$/, "Số điện thoại phải là số"),
   password: yup
     .string()
-    .required("Please enter your Password")
-    .min(6, "Password length must be from 6-20 characters")
-    .max(20, "Password length must be from 6-20 characters"),
+    .required("Hãy nhập mật khẩu")
+    .min(6, "Mật khẩu phải dài từ 6-20 ký tự")
+    .max(20, "Mật khẩu phải dài từ 6-20 ký tự"),
 });
 const AdminAddUserPage = () => {
   const {
@@ -80,65 +80,65 @@ const AdminAddUserPage = () => {
   };
   return (
     <div className="p-8 w-full">
-      <h1 className="font-bold text-2xl text-primary">ADD NEW LANDLORD</h1>
+      <h1 className="font-bold text-2xl text-primary">THÊM CHỦ TRỌ MỚI</h1>
       <form
         className="w-full max-w-[600px] mt-8"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Field>
-          <Label htmlFor="fullName">Full Name</Label>
+          <Label htmlFor="fullName">Tên đầy đủ:</Label>
           <Input
             type="text"
             name="fullName"
-            placeholder="Enter your Full name"
+            placeholder="Hãy nhập Tên đầy đủ"
             control={control}
           ></Input>
         </Field>
         <Field>
           <Label htmlFor="email" className="email">
-            Email
+            Email:
           </Label>
           <Input
             type="email"
             name="email"
-            placeholder="Enter your Email"
+            placeholder="Hãy nhập Địa chỉ email"
             control={control}
           ></Input>
         </Field>
         <Field>
-          <Label htmlFor="phone">Phone Number</Label>
+          <Label htmlFor="phone">Số điện thoại</Label>
           <Input
             type="text"
             name="phone"
-            placeholder="Enter your Phone number"
+            placeholder="Hãy nhập số điện thoại"
             control={control}
           ></Input>
         </Field>
         <Field>
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">Mật khẩu</Label>
           <Input
             type="password"
             name="password"
-            placeholder="Enter your Password"
+            placeholder="Hãy nhập Mật khẩu"
             control={control}
           ></Input>
         </Field>
         <Field>
-          <Label htmlFor="passwordConfirm">Password Confirm</Label>
+          <Label htmlFor="passwordConfirm">Xác nhận mật khẩu</Label>
           <Input
             type="password"
             name="passwordConfirm"
-            placeholder="Confirm your password"
+            placeholder="Hãy xác nhận Mật khẩu"
             control={control}
           ></Input>
           {getValues("password") &&
             watchPasswordConfirm !== getValues("password") && (
-              <div className="text-red-500">Not match</div>
+              <div className="text-red-500">Không khớp</div>
             )}
         </Field>
         <div className="button-container">
           <Button colorScheme="green" type="submit" isLoading={isLoading}>
-            Submit
+            Xác nhận
           </Button>
         </div>
       </form>

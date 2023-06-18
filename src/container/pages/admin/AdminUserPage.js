@@ -56,7 +56,7 @@ const AdminUserPage = () => {
   const handleDelete = (id) => {
     http.delete(`${PATHS.adminUsers}/${id}`).then((res) => {
       if (res.status === 200) {
-        toast.success("Delete successfully");
+        toast.success("Xoá thành công");
         getUserList();
       }
     });
@@ -76,21 +76,21 @@ const AdminUserPage = () => {
   }, [page, user, search]);
   //
   const head = [
-    "Full Name",
-    "Number Of Houses",
+    "Tên",
+    "Số lượng nhà trọ",
     "Email",
-    "Phone",
-    "Created Date",
-    "Updated Date",
+    "SĐT",
+    "Ngày tạo",
+    "Ngày cập nhật",
   ];
   return (
     <div className="w-full px-5 pt-8">
       <div className="flex flex-row justify-between">
         <h1 className="font-semibold text-primary text-2xl">
-          Landlords Management
+          QUẢN LÝ CHỦ TRỌ
         </h1>
         <Button leftIcon={<AiOutlineUserAdd />} onClick={() => navigate(PATHS.adminAddUsers)} className="ml-auto" colorScheme="green" variant="outline">
-          Landlord
+          Thêm
         </Button>
       </div>
       <div className="w-full h-full max-w-[1400px]">
@@ -98,7 +98,7 @@ const AdminUserPage = () => {
           <input
             type="text"
             className="px-4 py-2 border border-primary rounded-lg outline-none w-full"
-            placeholder="Search name, email, phone"
+            placeholder="Tìm Tên, SĐT, Email"
             value={search}
             onChange={handleSearch}
           />

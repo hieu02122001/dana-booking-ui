@@ -18,12 +18,12 @@ const AdminLoginPage = () => {
     .object({
       email: yup
         .string()
-        .email("Please enter valid email address")
-        .required("Please enter your email address"),
+        .email("Hãy nhập địa chỉ email hợp lệ")
+        .required("Hãy nhập địa chỉ email"),
       password: yup
         .string()
-        .min(6, "Your password must be at least 6 characters or greater")
-        .required("Please enter your password"),
+        .min(6, "Mật khẩu phải có độ dài trên 6 ký tự")
+        .required("Hãy nhập mật khẩu"),
     })
     .required();
   const {
@@ -53,7 +53,7 @@ const AdminLoginPage = () => {
       })
       .catch((err) => {
         console.log("error: ", err);
-        toast.error("Email or password incorrect");
+        toast.error("Sai Địa chỉ email hoặc Mật khẩu");
       });
   }
 
@@ -83,7 +83,7 @@ const AdminLoginPage = () => {
               <Input
                 type="text"
                 name="email"
-                placeholder="Enter your email"
+                placeholder="Nhập địa chỉ email"
                 control={control}
               ></Input>
               {errors.email && (
@@ -97,7 +97,7 @@ const AdminLoginPage = () => {
               <Input
                 type="password"
                 name="password"
-                placeholder="Enter your password"
+                placeholder="Nhập mật khẩu"
                 control={control}
               ></Input>
               {errors.password && (
@@ -108,14 +108,14 @@ const AdminLoginPage = () => {
             </Field>
             <div className="w-full flex justify-center pb-6">
               <Button colorScheme="teal" type="submit">
-                Sign In
+                Đăng nhập
               </Button>
             </div>
           </form>
           <div className="text-sm flex justify-center text-grayCustom">
-            <span className="inline-block mr-1">Don't have an account?</span>
+            <span className="inline-block mr-1">Chưa có tài khoản?</span>
             <NavLink to={"/register"} className="font-semibold cursor-pointer">
-              Sign up
+              Đăng ký
             </NavLink>
           </div>
         </div>

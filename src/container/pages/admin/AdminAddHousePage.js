@@ -17,10 +17,10 @@ import Option from "../../../components/dropdown/Option";
 import { Button } from "@chakra-ui/react";
 
 const schema = yup.object({
-  name: yup.string().required("Please enter a House's Name"),
-  userId: yup.string().required("Please choose an Email of the Owner"),
-  district: yup.string().required("Please choose a District"),
-  address: yup.string().required("Please enter a House's Address"),
+  name: yup.string().required("Hãy nhập Tên nhà trọ"),
+  userId: yup.string().required("Hãy nhập Địa chỉ email của chủ trọ"),
+  district: yup.string().required("Hãy chọn Quận"),
+  address: yup.string().required("Hãy nhập địa chỉ"),
   description: yup.string(),
 });
 const AdminAddHousePage = () => {
@@ -109,24 +109,24 @@ const AdminAddHousePage = () => {
 
   return (
     <div className="p-8 w-full">
-      <h1 className="font-bold text-2xl text-primary">ADD NEW HOUSE</h1>
+      <h1 className="font-bold text-2xl text-primary">THÊM NHÀ TRỌ MỚI</h1>
       <form
         className="w-full max-w-[600px] mt-8"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Field>
-          <Label htmlFor="name">House's Name</Label>
+          <Label htmlFor="name">Tên nhà trọ:</Label>
           <Input
             type="text"
             name="name"
-            placeholder="Enter a House's Name"
+            placeholder="Nhập Tên"
             control={control}
           ></Input>
         </Field>
         <Field>
-          <Label htmlFor="userId">Owner</Label>
+          <Label htmlFor="userId">Chủ trọ:</Label>
           <Dropdown>
-            <Select placeholder={ownerEmail || "Choose an Email"}></Select>
+            <Select placeholder={ownerEmail || "Chọn một Địa chỉ email"}></Select>
             <List>
               {landlords?.map((item) => (
                 <Option key={item.id} onClick={() => handleLandlordSelect(item)}>{item.email}</Option>
@@ -135,9 +135,9 @@ const AdminAddHousePage = () => {
           </Dropdown>
         </Field>
         <Field>
-          <Label htmlFor="district">District</Label>
+          <Label htmlFor="district">Quận:</Label>
           <Dropdown>
-            <Select placeholder={district || "Choose a District"}></Select>
+            <Select placeholder={district || "Chọn một Quận"}></Select>
             <List>
               {districts?.map((item) => (
                 <Option key={item.id} onClick={() => handleDistrictSelect(item)}>{item.name}</Option>
@@ -146,26 +146,26 @@ const AdminAddHousePage = () => {
           </Dropdown>
         </Field>
         <Field>
-          <Label htmlFor="address">Address</Label>
+          <Label htmlFor="address">Địa chỉ:</Label>
           <Input
             type="text"
             name="address"
-            placeholder="Enter a House's Address"
+            placeholder="Nhập Địa chỉ"
             control={control}
           ></Input>
         </Field>
         <Field>
-          <Label htmlFor="description">Description</Label>
+          <Label htmlFor="description">Mô tả:</Label>
           <Input
             type="text"
             name="description"
-            placeholder="Enter a House's Description"
+            placeholder="Nhập Mô tả"
             control={control}
           ></Input>
         </Field>
         <div className="button-container">
           <Button colorScheme="green" type="submit" isLoading={isLoading}>
-            Submit
+            Xác nhận
           </Button>
         </div>
       </form>

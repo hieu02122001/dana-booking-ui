@@ -33,9 +33,9 @@ import { useAuth } from "../../../context/authContext";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const LinkItems = [
-  { name: "Landlord", icon: FiUsers, url: PATHS.adminUsers },
-  { name: "House", icon: FiHome, url: PATHS.adminHouses },
-  { name: "Subscription", icon: FiFolder, url: PATHS.adminSubscriptions },
+  { name: "Chủ trọ", icon: FiUsers, url: PATHS.adminUsers },
+  { name: "Nhà trọ", icon: FiHome, url: PATHS.adminHouses },
+  { name: "Đăng ký dịch vụ", icon: FiFolder, url: PATHS.adminSubscriptions },
 ];
 
 export default function AdminSidebarWithHeader({ children }) {
@@ -231,10 +231,10 @@ const MobileNav = ({ onOpen, ...rest }) => {
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
               <MenuItem>
-                <NavLink to={PATHS.adminProfile}>Profile</NavLink>
+                <NavLink to={PATHS.adminProfile}>Cá nhân</NavLink>
               </MenuItem>
               <MenuDivider />
-              <MenuItem onClick={signOutClickHandle}>Sign out</MenuItem>
+              <MenuItem onClick={signOutClickHandle}>Đăng xuất</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
