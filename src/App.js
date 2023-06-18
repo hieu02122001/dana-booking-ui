@@ -13,6 +13,7 @@ import AdminAddSubsPage from "./container/pages/admin/AdminAddSubsPage";
 import LandlordLayout from "./container/layout/landlord/LandlordLayout";
 import LandlordLoginPage from "./container/pages/landlord/LandlordLoginPage";
 import LandlordHousePage from "./container/pages/landlord/LandlordHousePage";
+import LandlordRoomPage from "./container/pages/landlord/LandlordRoomPage";
 
 /// CLIENT
 
@@ -35,6 +36,7 @@ function App() {
         <Route path={PATHS.landlordLogin} element={<LandlordLoginPage />}></Route>
         <Route path={PATHS.landlordBase} element={<LandlordLayout />}>
           <Route path={PATHS.landlordHouses} element={<LandlordHousePage />}></Route>
+          <Route path={`${PATHS.landlordRooms}/houses/:houseId`} element={<LandlordRoomPage />}></Route>
         </Route>
       </Routes>
     </AuthProvider>

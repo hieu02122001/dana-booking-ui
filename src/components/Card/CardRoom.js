@@ -15,11 +15,11 @@ export default function CardChakra({ data }) {
   const navigate = useNavigate();
 
   function handleViewClick () {
-    navigate(`${PATHS.landlordRooms}?houseId=${data.id}`)
+    navigate(`${PATHS.landlordRooms}/view/${data.id}`)
   }
 
   function handleEditClick () {
-    navigate(`${PATHS.landlordHouses}/${data.id}`)
+    navigate(`${PATHS.landlordRooms}/edit/${data.id}`)
   }
 
   return (
@@ -45,11 +45,11 @@ export default function CardChakra({ data }) {
           </Text>
 
           <Text py="2">
-            {`Address: ${data.address}, ${data.district}`}
+            {`Price: ${data.price} VND`}
           </Text>
 
           <Text py="2">
-            {`Rented rooms: ${data.rentedRoomCount}/${data.roomCount}`}
+            {`Renter: ${data.user ? data.user.fullName : "(NONE)"}`}
           </Text>
         </CardBody>
 
