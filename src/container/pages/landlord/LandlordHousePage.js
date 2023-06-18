@@ -4,18 +4,18 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/authContext';
 import { PATHS } from '../../../utils/paths';
 import http from '../../../config/axiosConfig';
+import { Button } from '@chakra-ui/react';
+import { BsFillHouseAddFill } from 'react-icons/bs';
 
 export default function LandlordHousePage() {
   const navigate = useNavigate();
   const [houseList, setHouseList] = useState([]);
   const { user } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
 
   const getHouseList = () => {
     if (!localStorage.token) {
       navigate(PATHS.landlordLogin);
     }
-    setIsLoading(true);
     http
       .get(`${PATHS.landlordHouses}`)
       .then((res) => {
@@ -37,11 +37,9 @@ export default function LandlordHousePage() {
         });
         setHouseList(list);
         console.log(list);
-        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
-        setIsLoading(false);
       });
   }
   //
@@ -51,6 +49,20 @@ export default function LandlordHousePage() {
   //
   return (
     <div>
+      <div className="flex flex-row justify-between">
+        <h1 className="font-semibold text-primary text-2xl">
+          HOUSE MANAGEMENT
+        </h1>
+        <Button
+          leftIcon={<BsFillHouseAddFill />}
+          onClick={() => navigate(PATHS.landlordAddHouses)}
+          className="ml-auto"
+          colorScheme="green"
+          variant="outline"
+        >
+          House
+        </Button>
+      </div>
       {
         houseList.map((item) => {
           return <Card data={item} key={item.id}/>

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/authContext";
 import { PATHS } from "../../../utils/paths";
 import http from "../../../config/axiosConfig";
+import { Button } from "@chakra-ui/react";
+import { BsFillDoorOpenFill } from "react-icons/bs";
 
 export default function LandlordRoomPage() {
   const navigate = useNavigate();
@@ -56,7 +58,19 @@ export default function LandlordRoomPage() {
   //
   return (
     <div>
+      
+      <div className="flex flex-row justify-between">
       <h1 className="font-bold text-2xl text-primary">HOUSE: {houseName}</h1>
+        <Button
+          leftIcon={<BsFillDoorOpenFill />}
+          onClick={() => navigate(PATHS.landlordAddRooms)}
+          className="ml-auto"
+          colorScheme="green"
+          variant="outline"
+        >
+          Room
+        </Button>
+      </div>
       {roomList.map((item) => {
         return <CardRoom data={item} key={item.id} />;
       })}

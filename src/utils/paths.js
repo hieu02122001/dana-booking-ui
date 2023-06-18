@@ -22,7 +22,11 @@ export const PATHS = {
   landlordRegister: "/landlord/register",
   landlordUsers: "/landlord/users",
   landlordHouses: "/landlord/houses",
+  landlordAddHouses: "/landlord/houses/add",
+  landlordEditHouses: "/landlord/houses/edit",
   landlordRooms: "/landlord/rooms",
+  landlordAddRooms: "/landlord/rooms/add",
+  landlordEditRooms: "/landlord/rooms/edit",
   landlordBookings: "/landlord/bookings",
   landlordSubscriptions: "/landlord/subscriptions",
   // USER
