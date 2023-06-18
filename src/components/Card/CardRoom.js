@@ -48,10 +48,10 @@ export default function CardChakra({ data }) {
 
           <Text py="2">{`${data.description}`}</Text>
 
-          <Text py="2">{`Price: ${data.price} VND/Month`}</Text>
+          <Text py="2">{`Giá phòng: ${data.price} VND/Tháng`}</Text>
 
           <Text py="2">
-            {`Renter: ${data.user ? data.user.fullName : "(NONE)"}`}
+            {`Người thuê: ${data.user ? data.user.fullName : "(NONE)"}`}
           </Text>
         </CardBody>
 
@@ -62,11 +62,11 @@ export default function CardChakra({ data }) {
             colorScheme="green"
             onClick={handleViewClick}
           >
-            View
+            Xem chi tiết phòng
           </Button>
 
           <Button variant="solid" colorScheme="blue" onClick={handleEditClick}>
-            Edit
+            Chỉnh sửa
           </Button>
         </CardFooter>
       </Stack>

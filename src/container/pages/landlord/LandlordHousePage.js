@@ -51,7 +51,7 @@ export default function LandlordHousePage() {
     <div>
       <div className="flex flex-row justify-between">
         <h1 className="font-semibold text-primary text-2xl">
-          HOUSE MANAGEMENT
+          QUẢN LÝ NHÀ TRỌ
         </h1>
         <Button
           leftIcon={<BsFillHouseAddFill />}
@@ -60,7 +60,7 @@ export default function LandlordHousePage() {
           colorScheme="green"
           variant="outline"
         >
-          House
+          Thêm
         </Button>
       </div>
       {

@@ -60,7 +60,7 @@ export default function LandlordRoomPage() {
     <div>
       
       <div className="flex flex-row justify-between">
-      <h1 className="font-bold text-2xl text-primary">HOUSE: {houseName}</h1>
+      <h1 className="font-bold text-2xl text-primary">{houseName}</h1>
         <Button
           leftIcon={<BsFillDoorOpenFill />}
           onClick={() => navigate(PATHS.landlordAddRooms)}
@@ -68,7 +68,7 @@ export default function LandlordRoomPage() {
           colorScheme="green"
           variant="outline"
         >
-          Room
+          Thêm
         </Button>
       </div>
       {roomList.map((item) => {

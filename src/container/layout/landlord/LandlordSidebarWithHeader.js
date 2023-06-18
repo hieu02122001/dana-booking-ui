@@ -33,9 +33,9 @@ import { useAuth } from "../../../context/authContext";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const LinkItems = [
-  { name: "House", icon: FiHome, url: PATHS.landlordHouses },
-  { name: "Booking", icon: FiKey, url: PATHS.landlordBookings },
-  { name: "Subscription", icon: FiFolder, url: PATHS.landlordSubscriptions },
+  { name: "Nhà trọ", icon: FiHome, url: PATHS.landlordHouses },
+  { name: "Thuê phòng", icon: FiKey, url: PATHS.landlordBookings },
+  { name: "Đăng ký dịch vụ", icon: FiFolder, url: PATHS.landlordSubscriptions },
 ];
 
 export default function LandlordSidebarWithHeader({ children }) {
@@ -231,10 +231,10 @@ const MobileNav = ({ onOpen, ...rest }) => {
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
               <MenuItem>
-                <NavLink to={PATHS.adminProfile}>Profile</NavLink>
+                <NavLink to={PATHS.adminProfile}>Cá nhân</NavLink>
               </MenuItem>
               <MenuDivider />
-              <MenuItem onClick={signOutClickHandle}>Sign out</MenuItem>
+              <MenuItem onClick={signOutClickHandle}>Đăng xuất</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

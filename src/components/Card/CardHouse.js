@@ -51,21 +51,21 @@ export default function CardChakra({ data }) {
           </Text>
 
           <Text py="2">
-            {`Address: ${data.address}, ${data.district}`}
+            {`Địa chỉ: ${data.address}, ${data.district}`}
           </Text>
 
           <Text py="2">
-            {`Rented rooms: ${data.rentedRoomCount}/${data.roomCount}`}
+            {`Số phòng đã cho thuê: ${data.rentedRoomCount}/${data.roomCount}`}
           </Text>
         </CardBody>
 
         <CardFooter>
           <Button marginRight="10px" variant="solid" colorScheme="green" onClick={handleViewClick}>
-            View
+            Xem các phòng
           </Button>
 
           <Button variant="solid" colorScheme="blue" onClick={handleEditClick}>
-            Edit
+            Chỉnh sửa
           </Button>
         </CardFooter>
       </Stack>
