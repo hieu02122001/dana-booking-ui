@@ -27,14 +27,20 @@ export default function CardChakra({ data }) {
       direction={{ base: "column", sm: "row" }}
       overflow="hidden"
       variant="outline"
+      marginBottom="15px"
     >
-      <Image
-        objectFit="cover"
-        maxW={{ base: "100%", sm: "500px" }}
-        maxH={{ base: "100%", sm: "400px"}}
-        src={data.image || "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"}
-        alt="House"
-      />
+      <div
+        className="w-[500px] h-[300px] relative cursor-pointer"
+      >
+        <img
+          src={
+            data.image ||
+            "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+          }
+          alt=""
+          className="w-full h-full object-cover rounded-2xl"
+        />
+      </div>
 
       <Stack>
         <CardBody>
