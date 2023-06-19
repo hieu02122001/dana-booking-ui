@@ -40,7 +40,7 @@ const LandlordAddRoomPage = () => {
   const { state } = useLocation();
   const houseId = state?.houseId;
   const { user } = useAuth();
-  const [imageFiles, setImageFiles] = useState("");
+  const [imageFiles, setImageFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   //
   useEffect(() => {

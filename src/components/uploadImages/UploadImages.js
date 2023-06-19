@@ -1,27 +1,90 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdAddAPhoto } from "react-icons/md";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { db } from "../../firebase/firebase-config";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
 
 const UploadImages = ({ imageFiles, setImageFiles }) => {
-  // const [imageFiles, setImageFiles] = useState([]);
+  const handleUploadImage = (file, nameId) => {
+    return new Promise((resolve, reject) => {
+      if (!file) {
+        reject("No file provided");
+        return;
+      }
 
-  const handleFileInput = (e) => {
+      const storage = getStorage();
+      const storageRef = ref(storage, "booking/" + nameId);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Handle progress updates
+        },
+        (error) => {
+          // Handle unsuccessful upload
+          reject(error);
+        },
+        () => {
+          // Handle successful upload
+          getDownloadURL(uploadTask.snapshot.ref)
+            .then((downloadURL) => {
+              resolve({ file, nameId, url: downloadURL });
+            })
+            .catch((error) => {
+              reject(error);
+            });
+        }
+      );
+    });
+  };
+
+  const handleFileInput = async (e) => {
     if (imageFiles.length >= 6) return;
     const filesList = e.target.files;
-    if (filesList.length > 4) return;
-    const list = [];
+    if (filesList.length >= 6) return;
 
-    for (let i = 0; i < filesList.length; i++) {
-      const url = URL.createObjectURL(filesList[i]);
-      console.log(filesList[i].name);
-      list.push({ file: filesList[i], url: url });
+    const uploadPromises = Array.from(filesList).map(async (file) => {
+      const nameId = uuidv4();
+      const uploadedFile = await handleUploadImage(file, nameId);
+      return { ...uploadedFile, file };
+    });
+
+    try {
+      const uploadedFiles = await Promise.all(uploadPromises);
+
+      // Retrieve the download URLs
+      const downloadURLPromises = uploadedFiles.map((uploadedFile) => {
+        const { file, nameId } = uploadedFile;
+        return getDownloadURL(ref(getStorage(), "booking/" + nameId))
+          .then((downloadURL) => {
+            return { ...uploadedFile, url: downloadURL };
+          })
+          .catch((error) => {
+            // Handle errors if fetching download URL fails
+            return { ...uploadedFile, url: "" };
+          });
+      });
+
+      const updatedFiles = await Promise.all(downloadURLPromises);
+
+      // Update the state with the final list of uploaded files
+      const updatedList = [...imageFiles, ...updatedFiles];
+      setImageFiles(updatedList);
+    } catch (error) {
+      // Handle errors if any upload or download URL fetch fails
     }
-    setImageFiles([...imageFiles, ...list]);
   };
 
   const handleDeleteImage = (item) => {
-    let listImage = [];
-    listImage = imageFiles.filter(
+    const listImage = imageFiles.filter(
       (image) => image.file.name !== item.file.name
     );
     setImageFiles(listImage);

@@ -29,5 +29,9 @@ export const PATHS = {
   landlordEditRooms: "/landlord/rooms/edit",
   landlordBookings: "/landlord/bookings",
   landlordSubscriptions: "/landlord/subscriptions",
-  // USER
+  // TENANT
+  tenantBase: "/tenant",
+  tenantLogin: "/tenant/login",
+  tenantHouses: "/tenant/houses",
+  tenantBookings: "/tenant/bookings",
 };
