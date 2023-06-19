@@ -46,7 +46,7 @@ export default function CardChakra({ data }) {
         <CardBody>
           <Heading size="md">{data.name}</Heading>
           
-          <Text py="2">
+          <Text py="2" width="600px">
             {`${data.description}`}
           </Text>
 
