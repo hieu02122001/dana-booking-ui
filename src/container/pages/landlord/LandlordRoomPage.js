@@ -58,12 +58,13 @@ export default function LandlordRoomPage() {
   //
   return (
     <div>
-      
       <div className="flex flex-row justify-between">
-      <h1 className="font-bold text-2xl text-primary">{houseName}</h1>
+        <h1 className="font-bold text-2xl text-primary">{houseName}</h1>
         <Button
           leftIcon={<BsFillDoorOpenFill />}
-          onClick={() => navigate(PATHS.landlordAddRooms)}
+          onClick={() =>
+            navigate(PATHS.landlordAddRooms, { state: { houseId } })
+          }
           className="ml-auto"
           colorScheme="green"
           variant="outline"

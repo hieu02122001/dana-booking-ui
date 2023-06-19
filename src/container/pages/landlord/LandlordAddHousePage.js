@@ -114,8 +114,11 @@ const LandlordAddHousePage = () => {
         <Field>
           <Label htmlFor="image">Hình ảnh:</Label>
           <div className="max-w-[1200px] w-full h-[220px] mb-5">
-        <UploadImage imageFiles={imageFiles} setImageFiles={setImageFiles} />
-      </div>
+            <UploadImage
+              imageFiles={imageFiles}
+              setImageFiles={setImageFiles}
+            />
+          </div>
         </Field>
         <Field>
           <Label htmlFor="district">Quận:</Label>
