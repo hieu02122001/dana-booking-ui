@@ -1,22 +1,47 @@
 import { Select } from "@chakra-ui/react";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import http from "../../config/axiosConfig";
+import { PATHS } from "../../utils/paths";
 
 const Dropdown = () => {
-  const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const handleSearch = () => {
-    if (!search) return;
+  const [districts, setDistricts] = useState([]);
+  const [district, setDistrict] = useState({});
+
+  useEffect(() => {
+    http
+      .get(PATHS.filterDistrict)
+      .then((res) => {
+        setDistricts(res?.data?.rows);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const handleDistrictSelect = (name) => {
+    console.log(name);
+    const selectedDistrict = districts.find((item) => item.name === name);
+    setDistrict(selectedDistrict);
   };
+
+  const handleSearch = () => {
+    navigate(`${PATHS.tenantHouses}?district=${district?.id}`)
+  };
+
   return (
     <div className="w-[450px] h-[85px] flex flex-row justify-between items-center py-5 pl-8 pr-5 bg-white rounded-full">
       <div className="flex flex-col gap-2">
-        {/* <span className="font-bold text-xs">Quận</span> */}
-        <Select size="lg" width="200px" variant='flushed' placeholder="Chọn Quận">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+        <Select
+          size="lg"
+          width="200px"
+          variant="flushed"
+          placeholder="Chọn Quận"
+          onChange={(event) => handleDistrictSelect(event.target.value)}
+        >
+          {districts.map((item) => (
+            <option key={item.id}>{item.name}</option>
+          ))}
         </Select>
       </div>
       <button
