@@ -1,13 +1,26 @@
 import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure } from "@chakra-ui/react"
 import React from "react"
+import http from "../../config/axiosConfig";
+import { PATHS } from "../../utils/paths";
 
-export default function Ready() {
+export default function Draft({ data }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = React.useRef()
 
+  function handleYesClick () {
+    console.log(data);
+    http
+      .put(`${PATHS.adminSubscriptions}/${data.id}/status/paying`)
+      .then((res) => {
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   return (
     <>
-      <Button colorScheme="blue" onClick={onOpen}>Ready</Button>
+      <Button colorScheme="blue" onClick={onOpen}>SẴN SÀNG</Button>
       <AlertDialog
         motionPreset='slideInBottom'
         leastDestructiveRef={cancelRef}
@@ -18,18 +31,17 @@ export default function Ready() {
         <AlertDialogOverlay />
 
         <AlertDialogContent>
-          <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
+          <AlertDialogHeader>Xác nhận chuyển trạng thái?</AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
-            Are you sure you want to discard all of your notes? 44 words will be
-            deleted.
+            Bạn có muốn chuyển sang trạng thái CHỜ THANH TOÁN?
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
-              No
+              Không
             </Button>
-            <Button colorScheme='red' ml={3}>
-              Yes
+            <Button colorScheme='blue' onClick={handleYesClick} ml={3}>
+              Có
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

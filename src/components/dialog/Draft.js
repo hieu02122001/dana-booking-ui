@@ -2,7 +2,6 @@ import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogConten
 import React from "react"
 import http from "../../config/axiosConfig";
 import { PATHS } from "../../utils/paths";
-import { useNavigate } from "react-router-dom";
 
 export default function Draft({ data }) {
   const { isOpen, onOpen, onClose } = useDisclosure()

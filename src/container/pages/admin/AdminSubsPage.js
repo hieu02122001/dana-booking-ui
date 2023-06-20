@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Table from "../../../components/table/Table";
+import Table from "../../../components/table/TableAdmin";
 import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
