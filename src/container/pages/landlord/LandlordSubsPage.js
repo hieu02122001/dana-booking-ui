@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { AiFillFolderAdd } from "react-icons/ai";
 
-const AdminSubsPage = () => {
+const LandlordSubsPage = () => {
   const navigate = useNavigate();
   const [subsList, setSubsList] = useState([]);
   const { user } = useAuth();
@@ -23,14 +23,13 @@ const AdminSubsPage = () => {
     }
     setIsLoading(true);
     http
-      .get(`${PATHS.adminSubscriptions}?page=${page}`)
+      .get(`${PATHS.adminSubscriptions}?page=${page}&userId=${user.id}`)
       .then((res) => {
         console.log(res.data);
         const list = res?.data?.rows?.map((item) => {
           const subs = {
             id: item.id,
             houseName: item.house ? item.house.name : "(None)",
-            landlordEmail: item.user ? item.user.email : "(None)",
             package: item.package ? item.package.name : "(None)",
             beginDate: item.beginDate || "-",
             endDate: item.endDate || "-",
@@ -66,7 +65,6 @@ const AdminSubsPage = () => {
   //
   const head = [
     "Tên Nhà trọ",
-    "Email chủ trọ",
     "Gói",
     "Ngày bắt đầu",
     "Ngày kết thúc",
@@ -83,7 +81,7 @@ const AdminSubsPage = () => {
         </h1>
         <Button
           leftIcon={<AiFillFolderAdd />}
-          onClick={() => navigate(PATHS.adminAddSubscriptions)}
+          onClick={() => navigate(PATHS.landlordAddSubscriptions)}
           className="ml-auto"
           colorScheme="green"
           variant="outline"
@@ -111,4 +109,4 @@ const AdminSubsPage = () => {
   );
 };
 
-export default AdminSubsPage;
+export default LandlordSubsPage;

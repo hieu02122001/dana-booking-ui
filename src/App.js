@@ -25,6 +25,9 @@ import TenantLayout from "./container/layout/tenant/TenantLayout";
 import TenantHomePage from "./container/pages/tenant/TenantHomePage";
 import TenantLoginPage from "./container/pages/tenant/TenantLoginPage";
 import TenantHousePage from "./container/pages/tenant/TenantHousePage";
+import TenantRoomPage from "./container/pages/tenant/TenantRoomPage";
+import LandlordSubsPage from "./container/pages/landlord/LandlordSubsPage";
+import LandlordAddSubsPage from "./container/pages/landlord/LandlordAddSubsPage";
 
 function App() {
   return (
@@ -45,11 +48,14 @@ function App() {
           <Route path={PATHS.landlordAddHouses} element={<LandlordAddHousePage />}></Route>
           <Route path={`${PATHS.landlordRooms}/houses/:houseId`} element={<LandlordRoomPage />}></Route>
           <Route path={PATHS.landlordAddRooms} element={<LandlordAddRoomPage />}></Route>
+          <Route path={PATHS.landlordSubscriptions} element={<LandlordSubsPage />}></Route>
+          <Route path={PATHS.landlordAddSubscriptions} element={<LandlordAddSubsPage />}></Route>
         </Route>
         <Route path={PATHS.tenantLogin} element={<TenantLoginPage />}></Route>
         <Route path={PATHS.tenantBase} element={<TenantLayout />}>
           <Route path={PATHS.tenantBase} element={<TenantHomePage />}></Route>
           <Route path={PATHS.tenantHouses} element={<TenantHousePage />}></Route>
+          <Route path={`${PATHS.tenantHouses}/:houseId`} element={<TenantRoomPage />}></Route>
         </Route>
       </Routes>
     </AuthProvider>
