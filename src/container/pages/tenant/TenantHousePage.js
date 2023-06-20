@@ -35,7 +35,7 @@ const TenantHousePage = () => {
 
   const getHouseList = () => {
     if (!localStorage.token) {
-      navigate(PATHS.landlordLogin);
+      navigate(PATHS.tenantLogin);
     }
     http
       .get(`${PATHS.tenantHouses}?district=${district}`)
