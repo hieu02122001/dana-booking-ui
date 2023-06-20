@@ -4,8 +4,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import http from "../../config/axiosConfig";
 import { PATHS } from "../../utils/paths";
+import { useSearch } from "../../context/search-context";
 
 const Dropdown = () => {
+  const { setSearch } = useSearch();
   const navigate = useNavigate();
   const [districts, setDistricts] = useState([]);
   const [district, setDistrict] = useState({});
@@ -26,7 +28,14 @@ const Dropdown = () => {
   };
 
   const handleSearch = () => {
-    navigate(PATHS.tenantHouses, { state: { district: district?.id } });
+    setSearch((prev) => {
+      return {
+        ...prev,
+        districtId: district.id,
+        districtName: district.name
+      }
+    })
+    navigate(PATHS.tenantHouses);
   };
 
   return (

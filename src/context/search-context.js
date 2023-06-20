@@ -3,17 +3,11 @@ import { createContext, useContext, useState } from "react";
 const SearchContext = createContext();
 
 const SearchProvider = (props) => {
-  const [filter, setFilter] = useState({
-    cityId: "",
-    cityName: "",
-    animal: false,
-    minPrice: 0,
-    maxPrice: 500,
-    maxQuantityPeople: 0,
-    typeRoomId: "",
-    roomTypeName: "",
+  const [search, setSearch] = useState({
+    districtId: "",
+    districtName: "",
   });
-  const value = { filter, setFilter };
+  const value = { search, setSearch };
   return (
     <SearchContext.Provider {...props} value={value}></SearchContext.Provider>
   );

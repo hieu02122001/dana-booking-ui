@@ -1,6 +1,5 @@
 import {
   Button,
-  ButtonGroup,
   Card,
   CardBody,
   CardFooter,
@@ -15,13 +14,11 @@ import { PATHS } from "../../utils/paths";
 
 
 const TruncatedText = ({ text, wordLimit }) => {
-  const words = text.split(" ");
-  const truncatedText = words.slice(0, wordLimit).join(" ");
+  const truncatedText = text.slice(0, wordLimit);
 
   return (
     <Text>
-      {truncatedText}
-      {words.length > wordLimit && "..."}
+      {truncatedText}{text.length > wordLimit && "..."}
     </Text>
   );
 };
@@ -33,7 +30,7 @@ export default function CardHouseTenant({ data }) {
   }
   return (
     <div>
-      <Card maxW="sm">
+      <Card maxW="sm" maxH="xl">
         <CardBody>
           <Image
             height="200px"
@@ -44,14 +41,12 @@ export default function CardHouseTenant({ data }) {
           />
           <Stack mt="6" spacing="3">
             <Heading size="md">{data?.name}</Heading>
-            <Text>
-              {`${data?.address}, ${data?.district}`}
-            </Text>
-            <TruncatedText text={data?.description} wordLimit={13} />
+            <TruncatedText text={`${data?.address}, ${data?.district}`} wordLimit={35} />
+            <TruncatedText text={data?.description} wordLimit={75} />
             <Text>
               {`Còn: ${data?.roomCount - data?.rentedRoomCount} phòng`}
             </Text>
-            <Text color="blue.600" fontSize="2xl">
+            <Text color="blue.600">
               {`${data?.priceMin}đ - ${data?.priceMax}đ`}
             </Text>
           </Stack>

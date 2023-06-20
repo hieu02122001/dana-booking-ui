@@ -28,36 +28,81 @@ import TenantHousePage from "./container/pages/tenant/TenantHousePage";
 import TenantRoomPage from "./container/pages/tenant/TenantRoomPage";
 import LandlordSubsPage from "./container/pages/landlord/LandlordSubsPage";
 import LandlordAddSubsPage from "./container/pages/landlord/LandlordAddSubsPage";
+import { SearchProvider } from "./context/search-context";
 
 function App() {
   return (
     <AuthProvider>
-      <Routes>
-        <Route path={PATHS.adminLogin} element={<AdminLoginPage />}></Route>
-        <Route path={PATHS.adminBase} element={<AdminLayout />}>
-          <Route path={PATHS.adminUsers} element={<AdminUserPage />}></Route>
-          <Route path={PATHS.adminAddUsers} element={<AdminAddUserPage />}></Route>
-          <Route path={PATHS.adminHouses} element={<AdminHousePage />}></Route>
-          <Route path={PATHS.adminAddHouses} element={<AdminAddHousePage />}></Route>
-          <Route path={PATHS.adminSubscriptions} element={<AdminSubsPage />}></Route>
-          <Route path={PATHS.adminAddSubscriptions} element={<AdminAddSubsPage />}></Route>
-        </Route>
-        <Route path={PATHS.landlordLogin} element={<LandlordLoginPage />}></Route>
-        <Route path={PATHS.landlordBase} element={<LandlordLayout />}>
-          <Route path={PATHS.landlordHouses} element={<LandlordHousePage />}></Route>
-          <Route path={PATHS.landlordAddHouses} element={<LandlordAddHousePage />}></Route>
-          <Route path={`${PATHS.landlordRooms}/houses/:houseId`} element={<LandlordRoomPage />}></Route>
-          <Route path={PATHS.landlordAddRooms} element={<LandlordAddRoomPage />}></Route>
-          <Route path={PATHS.landlordSubscriptions} element={<LandlordSubsPage />}></Route>
-          <Route path={PATHS.landlordAddSubscriptions} element={<LandlordAddSubsPage />}></Route>
-        </Route>
-        <Route path={PATHS.tenantLogin} element={<TenantLoginPage />}></Route>
-        <Route path={PATHS.tenantBase} element={<TenantLayout />}>
-          <Route path={PATHS.tenantBase} element={<TenantHomePage />}></Route>
-          <Route path={PATHS.tenantHouses} element={<TenantHousePage />}></Route>
-          <Route path={`${PATHS.tenantHouses}/:houseId`} element={<TenantRoomPage />}></Route>
-        </Route>
-      </Routes>
+      <SearchProvider>
+        <Routes>
+          <Route path={PATHS.adminLogin} element={<AdminLoginPage />}></Route>
+          <Route path={PATHS.adminBase} element={<AdminLayout />}>
+            <Route path={PATHS.adminUsers} element={<AdminUserPage />}></Route>
+            <Route
+              path={PATHS.adminAddUsers}
+              element={<AdminAddUserPage />}
+            ></Route>
+            <Route
+              path={PATHS.adminHouses}
+              element={<AdminHousePage />}
+            ></Route>
+            <Route
+              path={PATHS.adminAddHouses}
+              element={<AdminAddHousePage />}
+            ></Route>
+            <Route
+              path={PATHS.adminSubscriptions}
+              element={<AdminSubsPage />}
+            ></Route>
+            <Route
+              path={PATHS.adminAddSubscriptions}
+              element={<AdminAddSubsPage />}
+            ></Route>
+          </Route>
+          <Route
+            path={PATHS.landlordLogin}
+            element={<LandlordLoginPage />}
+          ></Route>
+          <Route path={PATHS.landlordBase} element={<LandlordLayout />}>
+            <Route
+              path={PATHS.landlordHouses}
+              element={<LandlordHousePage />}
+            ></Route>
+            <Route
+              path={PATHS.landlordAddHouses}
+              element={<LandlordAddHousePage />}
+            ></Route>
+            <Route
+              path={`${PATHS.landlordRooms}/houses/:houseId`}
+              element={<LandlordRoomPage />}
+            ></Route>
+            <Route
+              path={PATHS.landlordAddRooms}
+              element={<LandlordAddRoomPage />}
+            ></Route>
+            <Route
+              path={PATHS.landlordSubscriptions}
+              element={<LandlordSubsPage />}
+            ></Route>
+            <Route
+              path={PATHS.landlordAddSubscriptions}
+              element={<LandlordAddSubsPage />}
+            ></Route>
+          </Route>
+          <Route path={PATHS.tenantLogin} element={<TenantLoginPage />}></Route>
+          <Route path={PATHS.tenantBase} element={<TenantLayout />}>
+            <Route path={PATHS.tenantBase} element={<TenantHomePage />}></Route>
+            <Route
+              path={PATHS.tenantHouses}
+              element={<TenantHousePage />}
+            ></Route>
+            <Route
+              path={`${PATHS.tenantHouses}/:houseId`}
+              element={<TenantRoomPage />}
+            ></Route>
+          </Route>
+        </Routes>
+      </SearchProvider>
     </AuthProvider>
   );
 }

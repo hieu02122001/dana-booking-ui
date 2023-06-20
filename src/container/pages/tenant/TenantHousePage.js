@@ -1,42 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { BsFilter } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import Search from "../../../components/search/Search";
 import http from "../../../config/axiosConfig";
-import { useLocation, useNavigate } from "react-router-dom";
-import CardHouseTenant from "../../../components/Card/CardHouseTenant";
+import { useSearch } from "../../../context/search-context";
+import Loading from "../../../components/loading/Loading";
 import { PATHS } from "../../../utils/paths";
+import CardHouseTenant from "../../../components/Card/CardHouseTenant";
 
 const TenantHousePage = () => {
-  const { state } = useLocation();
-  const district = state?.district || "";
-  const navigate = useNavigate();
   const [houses, setHouses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { search } = useSearch();
+  const navigate = useNavigate();
 
-  const filterQuery = ({ ...filter }) => {
-    let filterList = "rooms/room-filter";
-    const urlString = [];
-    if (filter?.cityName) {
-      const cityName = filter.cityName.replaceAll(" ", "_");
-      urlString.push(`cityName=${cityName}`);
-    }
-    if (filter?.minPrice) {
-      urlString.push(`minPrice=${filter?.minPrice || ""}`);
-    }
-    if (filter?.maxPrice < 500) {
-      urlString.push(`maxPrice=${filter?.maxPrice || ""}`);
-    }
-    if (filter?.roomName) {
-      urlString.push(`roomName=${filter?.roomName || ""}`);
-    }
-    if (urlString.length !== 0) {
-      filterList = filterList.concat(`?${urlString.join("&")}`);
-    }
-    return filterList;
-  };
-
-  const getHouseList = () => {
-    if (!localStorage.token) {
-      navigate(PATHS.tenantLogin);
-    }
+  useEffect(() => {
+    setIsLoading(true);
+    const district = search.districtId;
     http
       .get(`${PATHS.tenantHouses}?district=${district}`)
       .then((res) => {
@@ -59,28 +38,38 @@ const TenantHousePage = () => {
           return houses;
         });
         setHouses(list);
+        setIsLoading(false);
         console.log(list);
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
       });
-  }
-  //
-  useEffect(() => {
-    getHouseList();
-  }, []);
+  }, [search.districtId]);
+  const handleSearch = (values) => {
+    // setIsLoading(true);
+    const district = search.districtId;
+  };
 
   return (
-    <div className="w-full flex flex-col mt-[50px]">
-      <div className="w-full max-w-[600px] mx-auto relative z-20">
-        <h1 className="text-2xl font-[500] mb-4 ml-3">
-          KHÁM PHÁ CÁC DÃY TRỌ PHÙ HỢP VỚI BẠN
-        </h1>
+    <div className="flex flex-row w-full relative">
+      <div className="px-8 py-5 bg-opacity-20  w-[25%] shadow-lg h-[720px] sticky top-0 border border-slate-100">
+        <Search handleSearch={handleSearch} col={true} />
       </div>
-      <div className="mt-[50px] grid grid-cols-4 gap-x-12 w-full max-w-[1400px] gap-y-3 mx-auto relative z-0">
-        {houses.map((item) => (
-          <CardHouseTenant data={item} />
-        ))}
+      <div className="w-[75%] px-5 border">
+        <h1 className="text-2xl font-bold mb-5 mt-5">
+          Cho Thuê Phòng Trọ, Giá Rẻ, Tiện Nghi, Mới Nhất 2023
+        </h1>
+        {isLoading ? (
+          <Loading></Loading>
+        ) : (
+          <div className="grid grid-cols-3 gap-1 ">
+            {houses.length > 0 &&
+              houses.map((item) => {
+                return <CardHouseTenant data={item} />;
+              })}
+          </div>
+        )}
       </div>
     </div>
   );
