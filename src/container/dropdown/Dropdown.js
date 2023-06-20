@@ -26,7 +26,7 @@ const Dropdown = () => {
   };
 
   const handleSearch = () => {
-    navigate(`${PATHS.tenantHouses}?district=${district?.id}`)
+    navigate(PATHS.tenantHouses, { state: { district: district?.id } });
   };
 
   return (

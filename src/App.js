@@ -24,6 +24,7 @@ import LandlordAddRoomPage from "./container/pages/landlord/LandlordAddRoomPage"
 import TenantLayout from "./container/layout/tenant/TenantLayout";
 import TenantHomePage from "./container/pages/tenant/TenantHomePage";
 import TenantLoginPage from "./container/pages/tenant/TenantLoginPage";
+import TenantHousePage from "./container/pages/tenant/TenantHousePage";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path={PATHS.tenantLogin} element={<TenantLoginPage />}></Route>
         <Route path={PATHS.tenantBase} element={<TenantLayout />}>
           <Route path={PATHS.tenantBase} element={<TenantHomePage />}></Route>
+          <Route path={PATHS.tenantHouses} element={<TenantHousePage />}></Route>
         </Route>
       </Routes>
     </AuthProvider>
