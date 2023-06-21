@@ -106,10 +106,11 @@ const TenantHouseDetailPage = () => {
                   id={room.id}
                   locationId={houseId}
                   url={
-                    room.imgUrl ||
+                    room.images[0] ||
                     " https://images.unsplash.com/photo-1670366732840-f34c7c12fd5a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
                   }
-                  isAvailable={!!room.userId}
+                  isRented={!!room.userId}
+                  description={room.description}
                   roomName={room.name}
                   price={room.price}
                 />
