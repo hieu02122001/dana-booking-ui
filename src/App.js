@@ -25,10 +25,10 @@ import TenantLayout from "./container/layout/tenant/TenantLayout";
 import TenantHomePage from "./container/pages/tenant/TenantHomePage";
 import TenantLoginPage from "./container/pages/tenant/TenantLoginPage";
 import TenantHousePage from "./container/pages/tenant/TenantHousePage";
-import TenantRoomPage from "./container/pages/tenant/TenantRoomPage";
 import LandlordSubsPage from "./container/pages/landlord/LandlordSubsPage";
 import LandlordAddSubsPage from "./container/pages/landlord/LandlordAddSubsPage";
 import { SearchProvider } from "./context/search-context";
+import TenantHouseDetailPage from "./container/pages/tenant/TenantHouseDetailPage";
 
 function App() {
   return (
@@ -98,7 +98,7 @@ function App() {
             ></Route>
             <Route
               path={`${PATHS.tenantHouses}/:houseId`}
-              element={<TenantRoomPage />}
+              element={<TenantHouseDetailPage />}
             ></Route>
           </Route>
         </Routes>

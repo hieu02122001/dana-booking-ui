@@ -34,5 +34,6 @@ export const PATHS = {
   tenantBase: "/tenant",
   tenantLogin: "/tenant/login",
   tenantHouses: "/tenant/houses",
+  tenantRooms: "/tenant/rooms",
   tenantBookings: "/tenant/bookings",
 };
