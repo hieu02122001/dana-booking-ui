@@ -68,24 +68,36 @@ const TenantRoomDetailPage = () => {
                   className="w-full h-full object-cover rounded-lg"
                 />
               </div>
+              <div className="w-full grid grid-cols-4 gap-3 mt-3">
+                {roomDetail?.images.map((item, index) => {
+                  if (index > 0 && index < 5) {
+                    return (
+                      <div className="w-[190px] h-[190px]">
+                        <img
+                          src={item}
+                          alt=""
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      </div>
+                    );
+                  }
+                  return <></>
+                })}
+              </div>
             </div>
             <div className="h-full w-[35%]">
               <div className="flex flex-col gap-3 px-5 py-5 rounded-xl shadow-lg relative">
                 <h1 className="text-4xl font-bold">{roomDetail?.name}</h1>
                 <div className="flex flex-col gap-2 mt-5">
                   <div>
-                    <span className="font-semibold text-xl">
-                      Mô tả:
-                    </span>
+                    <span className="font-semibold text-xl">Mô tả:</span>
                     <span className="text-xl">
                       {roomDetail?.description || " (Không có)"}
                     </span>
                   </div>
 
                   <div>
-                    <span className="font-semibold text-xl">
-                      Tình trạng:
-                    </span>
+                    <span className="font-semibold text-xl">Tình trạng:</span>
                     <span className="text-xl">
                       {roomDetail?.userId ? " Đã được đặt" : " Còn trống"}
                     </span>
@@ -97,7 +109,8 @@ const TenantRoomDetailPage = () => {
                 </div>
                 <button
                   onClick={handleRentNow}
-                  className="w-full py-3 rounded-full bg-primary text-white font-semibold"
+                  className="w-full py-3 rounded-full bg-primary text-white font-semibold disabled:bg-grayLight"
+                  disabled={!!roomDetail?.userId}
                 >
                   Thuê ngay
                 </button>
