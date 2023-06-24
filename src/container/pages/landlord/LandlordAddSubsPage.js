@@ -19,8 +19,8 @@ const LandlordAddSubsPage = () => {
   const { user } = useAuth();
   const [houses, setHouses] = useState([]);
   const [houseSelect, setHouseSelect] = useState("");
-  const [packages, setPackages] = useState([]);
-  const [packagesSelect, setPackagesSelect] = useState("");
+  const [rooms, setRooms] = useState([]);
+  const [roomSelect, setRoomSelect] = useState("");
   const [totalPrice, setTotalPrice] = useState();
   //
   const [value, setValue] = useState();
@@ -39,33 +39,32 @@ const LandlordAddSubsPage = () => {
         setIsLoading(false);
         console.log(err);
       });
-
-    http
-      .get("packages")
-      .then((res) => {
-        setPackages(res.data?.rows);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }, []);
   const handleClickHouse = (item) => {
+    http
+    .get(`${PATHS.landlordRooms}?houseId=${item.id}`)
+    .then((res) => {
+      setRooms(res.data?.rows);
+      setIsLoading(false);
+    })
+    .catch((err) => {
+      setIsLoading(false);
+      console.log(err);
+    });
     setHouseSelect(item.name);
+    setRoomSelect();
     setValue({
       ...value,
       houseId: item.id,
     });
   };
-  const handleClickPackage = (item) => {
-    const houseId = value?.houseId;
-    if (!houseId) return;
-    setPackagesSelect(`${item.name}  -  ${item.months} months`);
-    const price = item.price.toLocaleString("vi-VI") + " VND";
-    setTotalPrice(price);
+  const handleClickRoom = (item) => {
+    setRoomSelect(item.name);
+    setTotalPrice(item.price)
     setValue({
       ...value,
-      packageId: item.id,
-      totalPrice: item.price,
+      roomId: item.id,
+      totalPrice: item.price
     });
   };
   const handleSubmit = () => {
@@ -109,17 +108,17 @@ const LandlordAddSubsPage = () => {
           </Dropdown>
         </Field>
         <Field>
-          <Label>Gói:</Label>
+          <Label>Phòng trọ:</Label>
           <Dropdown>
-            <Select placeholder={packagesSelect || "Chọn một Gói"}></Select>
+            <Select placeholder={roomSelect || "Chọn một Phòng trọ"}></Select>
             <List>
-              {packages.length > 0 &&
-                packages.map((item) => (
+              {rooms.length > 0 &&
+                rooms.map((item) => (
                   <Option
-                    key={item._id}
-                    onClick={() => handleClickPackage(item)}
+                    key={item.id}
+                    onClick={() => handleClickRoom(item)}
                   >
-                    {`${item.name}  -  ${item.months} Tháng`}
+                    {item.name}
                   </Option>
                 ))}
             </List>
@@ -131,8 +130,8 @@ const LandlordAddSubsPage = () => {
           <div className="flex flex-col gap-2">
             {totalPrice && (
               <div>
-                <span className="font-semibold">Tổng tiền: </span>
-                {totalPrice}
+                <span className="font-semibold">Tổng tiền phòng: </span>
+                {`${totalPrice} VND (Tiền hoa hồng là 5%)`}
               </div>
             )}
           </div>

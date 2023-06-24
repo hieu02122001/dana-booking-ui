@@ -19,7 +19,7 @@ export default function SubsRunning({ data }) {
   }
   return (
     <>
-      <Button colorScheme="yellow" onClick={onOpen}>ĐANG HOẠT ĐỘNG</Button>
+      <Button size="xs" colorScheme="yellow" onClick={onOpen}>HOẠT ĐỘNG</Button>
       <AlertDialog
         motionPreset='slideInBottom'
         leastDestructiveRef={cancelRef}
@@ -37,10 +37,10 @@ export default function SubsRunning({ data }) {
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
-              No
+              Không
             </Button>
             <Button colorScheme='red'  onClick={handleYesClick} ml={3}>
-              Yes
+              Có
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
