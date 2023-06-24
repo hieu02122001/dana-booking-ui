@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import http from "../../../config/axiosConfig";
 import { PATHS } from "../../../utils/paths";
-import { toast } from "react-toastify";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { AiFillFolderAdd } from "react-icons/ai";
 
@@ -30,11 +29,12 @@ const AdminSubsPage = () => {
           const subs = {
             id: item.id,
             houseName: item.house ? item.house.name : "(None)",
+            roomName: item.room ? item.room.name : "(None)",
             landlordEmail: item.user ? item.user.email : "(None)",
-            package: item.package ? item.package.name : "(None)",
             beginDate: item.beginDate || "-",
             endDate: item.endDate || "-",
             totalPrice: item.totalPrice,
+            brokerageFee: item.brokerageFee || "-",
             status: item.status,
             createdAt: item.createdAt,
             updatedAt: item.updatedAt,
@@ -65,15 +65,15 @@ const AdminSubsPage = () => {
   }, [page, user]);
   //
   const head = [
-    "Tên Nhà trọ",
+    "Tên nhà trọ",
+    "Tên phòng trọ",
     "Email chủ trọ",
-    "Gói",
     "Ngày bắt đầu",
     "Ngày kết thúc",
     "Tổng tiền (VND)",
+    "Phí dịch vụ",
     "Trạng thái",
-    "Ngày tạo",
-    "Ngày cập nhật",
+    "Ngày tạo"
   ];
   return (
     <div className="w-full px-5 pt-8">

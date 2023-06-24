@@ -2,8 +2,7 @@ import React from "react";
 import { TbEdit, TbTrashXFilled } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
-import Draft from "../dialog/Draft";
-import Paying from "../dialog/Paying";
+import SubsRunning from "../dialog/SubsRunning";
 
 const Table = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ const Table = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
                   </th>
                 );
               })}
-            <th></th>
           </tr>
         </thead>
         {!isLoading && (
@@ -39,40 +37,18 @@ const Table = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
                       .map((value, i) => {
                         return (
                           <td key={i}>
-                            {value === "CANCELED" ? (
-                              <span style={{ color: "#d75a64" }}>ĐÃ HUỶ</span>
-                            ) : value === "DRAFT" ? (
-                              <Draft data={item} />
+                            {value === "FAIL" ? (
+                              <span style={{ color: "#d75a64" }}>THẤT BẠI</span>
+                            ) : value === "SUCCESS" ? (
+                              <span style={{ color: "#16FF00" }}>THÀNH CÔNG</span>
                             ) : value === "RUNNING" ? (
-                              <span style={{ color: "#16FF00" }}>ĐANG HOẠT ĐỘNG</span>
-                            ) : value === "READY" ? (
-                              <span style={{ color: "#2192FF" }}>SẴN SÀNG</span>
-                            ) : value === "PAYING" ? (
-                              <Paying data={item} />
-                            ) : value === "DONE" ? (
-                              <span style={{ color: "#A149FA" }}>HOÀN THÀNH</span>
+                              <SubsRunning data={item}/>
                             ) : (
                               <span>{value}</span>
                             )}
                           </td>
                         );
                       })}
-                    <td>
-                      <div className="flex flex-row w-full justify-end gap-2 mt-auto">
-                        <Button
-                          bg="bg-cyan-400"
-                          onClick={() => navigate(`${linkTo}${item.id}`)}
-                        >
-                          <TbEdit />
-                        </Button>
-                        <Button
-                          bg="bg-red-500"
-                          onClick={() => handleDelete(item.id)}
-                        >
-                          <TbTrashXFilled />
-                        </Button>
-                      </div>
-                    </td>
                   </tr>
                 );
               })}

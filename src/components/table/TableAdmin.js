@@ -39,18 +39,12 @@ const Admin = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
                       .map((value, i) => {
                         return (
                           <td key={i}>
-                            {value === "CANCELED" ? (
-                              <span style={{ color: "#d75a64" }}>ĐÃ HUỶ</span>
-                            ) : value === "DRAFT" ? (
-                              <span style={{ color: "#BDCDD6" }}>NHÁP</span>
+                            {value === "FAIL" ? (
+                              <span style={{ color: "#d75a64" }}>THẤT BẠI</span>
+                            ) : value === "SUCCESS" ? (
+                              <span style={{ color: "#16FF00" }}>THÀNH CÔNG</span>
                             ) : value === "RUNNING" ? (
-                              <span style={{ color: "#16FF00" }}>ĐANG HOẠT ĐỘNG</span>
-                            ) : value === "READY" ? (
-                              <Ready data={item} />
-                            ) : value === "PAYING" ? (
-                              <span style={{ color: "#fece04" }}>CHỜ THANH TOÁN</span>
-                            ) : value === "DONE" ? (
-                              <span style={{ color: "#A149FA" }}>HOÀN THÀNH</span>
+                              <span style={{ color: "#fece04" }}>ĐANG HOẠT ĐỘNG</span>
                             ) : (
                               <span>{value}</span>
                             )}

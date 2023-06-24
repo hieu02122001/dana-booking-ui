@@ -30,10 +30,11 @@ const LandlordSubsPage = () => {
           const subs = {
             id: item.id,
             houseName: item.house ? item.house.name : "(None)",
-            package: item.package ? item.package.name : "(None)",
+            roomName: item.room ? item.room.name : "(None)",
             beginDate: item.beginDate || "-",
             endDate: item.endDate || "-",
             totalPrice: item.totalPrice,
+            brokerageFee: item.brokerageFee || "-",
             status: item.status,
             createdAt: item.createdAt,
             updatedAt: item.updatedAt,
@@ -65,13 +66,13 @@ const LandlordSubsPage = () => {
   //
   const head = [
     "Tên Nhà trọ",
-    "Gói",
+    "Tên phòng trọ",
     "Ngày bắt đầu",
     "Ngày kết thúc",
     "Tổng tiền (VND)",
+    "Phí dịch vụ",
     "Trạng thái",
-    "Ngày tạo",
-    "Ngày cập nhật",
+    "Ngày tạo"
   ];
   return (
     <div className="w-full px-5 pt-8">
