@@ -3,8 +3,6 @@ import http from "../../config/axiosConfig";
 import Label from "../label/Label";
 import "react-datetime/css/react-datetime.css";
 import DatePicker from "react-datetime";
-import Checkbox from "../checkbox/Checkbox";
-import CheckBoxItem from "../checkbox/CheckBoxItem";
 import { toast } from "react-toastify";
 import RentModal from "./RentModal";
 import moment from "moment";
@@ -16,48 +14,15 @@ const RentRoomForm = ({ locationId, roomId, roomDetail }) => {
   const [location, setLocation] = useState();
   const [showModalRent, setShowModalRent] = useState(false);
   useEffect(() => {
-    http
-      .get(`booking/locations/${locationId}/utilities`)
-      .then((res) => {
-        let listUti = res.data;
-        listUti = listUti.map((item) => {
-          const priceInt = +item.price
-            .split("")
-            .filter((digit) => digit !== ".")
-            .join("");
-          return {
-            value: {
-              ...item,
-              priceInt: priceInt,
-            },
-            checked: false,
-          };
-        });
-        setUtilities(listUti);
-      })
-      .catch((err) => {
-        console.log("utilities: ", err);
-      });
     http.get(`booking/locations/${locationId}`).then((res) => {
       setLocation(res.data);
     });
   }, [locationId]);
-  const handleClickUtility = (item) => {
-    let listUti = utilities.map((utility) => {
-      if (utility.value.id === item.value.id)
-        return {
-          ...utility,
-          checked: !utility.checked,
-        };
-      return utility;
-    });
-    setUtilities(listUti);
-  };
 
   const handleNextStep = (e) => {
     e.preventDefault();
     if (!date) {
-      toast.error("Please choose your start date");
+      toast.error("Hãy chọn ngày bắt đầu!");
       return;
     }
     const utilitiesClient = [];
@@ -102,7 +67,7 @@ const RentRoomForm = ({ locationId, roomId, roomDetail }) => {
         onSubmit={handleNextStep}
         className="w-full mt-5 px-4 py-4 shadow-lg rounded-xl"
       >
-        <Label>Start Date</Label>
+        <Label>Ngày bắt đầu:</Label>
         <div className="date_picker_wrapper mb-5 ">
           <DatePicker
             onChange={(date) => setDate(date)}
@@ -115,7 +80,7 @@ const RentRoomForm = ({ locationId, roomId, roomDetail }) => {
             inputProps={{ readOnly: true }}
           />
         </div>
-        <Label>Month Rent</Label>
+        <Label>Số tháng thuê:</Label>
         <div className="w-full mt-5 mb-5">
           <input
             type="number"
@@ -124,27 +89,11 @@ const RentRoomForm = ({ locationId, roomId, roomDetail }) => {
             className="w-full px-3 py-2 max-w-[240px] rounded-md outline-none border-slate-200 bg-slate-100 focus:border-red-400 border"
           />
         </div>
-        <Label>Utilities</Label>
-        <div className="w-full max-w-[240px]">
-          {utilities && (
-            <Checkbox>
-              {utilities.map((item) => (
-                <CheckBoxItem
-                  key={item.value.id}
-                  value={item.value}
-                  title={`${item.value.name}: ${item.value.price} VND`}
-                  onChange={() => handleClickUtility(item)}
-                  checked={item.checked}
-                />
-              ))}
-            </Checkbox>
-          )}
-        </div>
         <button
           type="submit"
           className="w-full py-3 rounded-full bg-primary text-white font-semibold mt-5"
         >
-          Next Step
+          Bước tiếp theo
         </button>
       </form>
     </>
