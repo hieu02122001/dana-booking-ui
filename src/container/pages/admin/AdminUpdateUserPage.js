@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import { toast } from "react-toastify";
 import http from "../../../config/axiosConfig";
@@ -23,13 +23,8 @@ const schema = yup.object({
     .string()
     .required("Hãy nhập Số điện thoại")
     .matches(/^\d+$/, "Số điện thoại phải là số"),
-  password: yup
-    .string()
-    .required("Hãy nhập mật khẩu")
-    .min(6, "Mật khẩu phải dài từ 6-20 ký tự")
-    .max(20, "Mật khẩu phải dài từ 6-20 ký tự"),
 });
-const AdminAddUserPage = () => {
+const AdminUpdateUserPage = () => {
   const {
     handleSubmit,
     control,
@@ -37,6 +32,7 @@ const AdminAddUserPage = () => {
     getValues,
     formState: { errors },
     watch,
+    reset
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onSubmit",
@@ -48,10 +44,10 @@ const AdminAddUserPage = () => {
     },
   });
   const navigate = useNavigate();
-  const { user } = useAuth();
-  const watchPasswordConfirm = watch("passwordConfirm");
   const [isLoading, setIsLoading] = useState(false);
   const [imageFiles, setImageFiles] = useState("");
+  const params = useParams();
+  const {userId} = params;
   //
   useEffect(() => {
     const errorsList = Object.values(errors);
@@ -60,17 +56,34 @@ const AdminAddUserPage = () => {
     }
   }, [errors]);
   //
+  useEffect(() => {
+    http
+      .get(`${PATHS.adminUsers}/${userId}`)
+      .then((res) => {
+        const userDetail = res?.data;
+        reset({
+          fullName: userDetail.fullName,
+          image: userDetail.image,
+          email: userDetail.email,
+          phone: userDetail.phone,
+        })
+        console.log(userDetail);
+        const listFiles = { file: {name: userDetail?.image }, url: userDetail?.image };
+        setImageFiles([listFiles]);
+      })
+      .catch((err) => console.log(err));
+  }, [])
+  //
   const onSubmit = async (values) => {
     const userObj = {
       fullName: values.fullName,
       image: imageFiles[0].url,
       email: values.email,
       phone: values.phone,
-      password: values.password,
     };
     setIsLoading(true);
     await http
-      .post(PATHS.adminUsers, userObj)
+      .put(`${PATHS.adminUsers}/${userId}`, userObj)
       .then((res) => {
         navigate(PATHS.adminUsers);
         setIsLoading(false);
@@ -83,7 +96,7 @@ const AdminAddUserPage = () => {
   };
   return (
     <div className="p-8 w-full">
-      <h1 className="font-bold text-2xl text-primary">THÊM CHỦ TRỌ MỚI</h1>
+      <h1 className="font-bold text-2xl text-primary">CẬP NHẬT CHỦ TRỌ</h1>
       <form
         className="w-full max-w-[600px] mt-8"
         onSubmit={handleSubmit(onSubmit)}
@@ -126,28 +139,6 @@ const AdminAddUserPage = () => {
             control={control}
           ></Input>
         </Field>
-        <Field>
-          <Label htmlFor="password">Mật khẩu</Label>
-          <Input
-            type="password"
-            name="password"
-            placeholder="Hãy nhập Mật khẩu"
-            control={control}
-          ></Input>
-        </Field>
-        <Field>
-          <Label htmlFor="passwordConfirm">Xác nhận mật khẩu</Label>
-          <Input
-            type="password"
-            name="passwordConfirm"
-            placeholder="Hãy xác nhận Mật khẩu"
-            control={control}
-          ></Input>
-          {getValues("password") &&
-            watchPasswordConfirm !== getValues("password") && (
-              <div className="text-red-500">Không khớp</div>
-            )}
-        </Field>
         <div className="button-container">
           <Button colorScheme="green" type="submit" isLoading={isLoading}>
             Xác nhận
@@ -158,4 +149,4 @@ const AdminAddUserPage = () => {
   );
 };
 
-export default AdminAddUserPage;
+export default AdminUpdateUserPage;
