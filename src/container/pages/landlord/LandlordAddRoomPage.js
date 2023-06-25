@@ -26,6 +26,7 @@ const LandlordAddRoomPage = () => {
     getValues,
     formState: { errors },
     watch,
+    register
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onSubmit",

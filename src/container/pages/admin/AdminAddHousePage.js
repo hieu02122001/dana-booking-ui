@@ -31,6 +31,7 @@ const AdminAddHousePage = () => {
     getValues,
     formState: { errors },
     watch,
+    register
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onSubmit",
@@ -156,12 +157,12 @@ const AdminAddHousePage = () => {
         </Field>
         <Field>
           <Label htmlFor="description">Mô tả:</Label>
-          <Input
-            type="text"
+          <textarea
+            id="description"
             name="description"
-            placeholder="Nhập Mô tả"
-            control={control}
-          ></Input>
+            className="w-full max-w-[500px] min-h-[200px] outline-none border  bg-slate-100 focus:border-primary rounded-xl p-4"
+            {...register("description")}
+          ></textarea>
         </Field>
         <div className="button-container">
           <Button colorScheme="green" type="submit" isLoading={isLoading}>
