@@ -13,9 +13,6 @@ const TenantHeader = () => {
     navigate(PATHS.tenantBase);
   };
   const handleSignInOut = () => {
-    if (!user.id) {
-      navigate(PATHS.tenantLogin);
-    }
     if (user.id) {
       localStorage.removeItem("token");
       setUser({
@@ -61,7 +58,7 @@ const TenantHeader = () => {
       <div className="flex flex-row gap-4 justify-center items-center ml-16">
         {items.map((item) => (
           <NavLink
-            to={user?.id ? item.url : PATHS.tenantLogin}
+            to={item.url}
             key={item.name}
             className={({ isActive }) =>
               `text-base cursor-pointer hover:text-primary border-b-noColor border-b hover:border-primary ${
