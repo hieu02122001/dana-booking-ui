@@ -14,12 +14,8 @@ import { PATHS } from "../../utils/paths";
 export default function CardChakra({ data }) {
   const navigate = useNavigate();
 
-  function handleViewClick() {
-    navigate(`${PATHS.landlordRooms}/view/${data.id}`);
-  }
-
   function handleEditClick() {
-    navigate(`${PATHS.landlordRooms}/edit/${data.id}`);
+    navigate(`${PATHS.landlordRooms}/${data.id}`);
   }
 
   return (
@@ -56,15 +52,6 @@ export default function CardChakra({ data }) {
         </CardBody>
 
         <CardFooter>
-          <Button
-            marginRight="10px"
-            variant="solid"
-            colorScheme="green"
-            onClick={handleViewClick}
-          >
-            Xem chi tiết phòng
-          </Button>
-
           <Button variant="solid" colorScheme="blue" onClick={handleEditClick}>
             Chỉnh sửa
           </Button>

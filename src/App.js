@@ -34,6 +34,7 @@ import LandlordBookingPage from "./container/pages/landlord/LandlordBookingPage"
 import TenantBookingPage from "./container/pages/tenant/TenantBookingPage";
 import BookingLayout from "./container/bookingLayout/BookingLayout";
 import LandlordUpdateHousePage from "./container/pages/landlord/LandlordUpdateHousePage";
+import LandlordUpdateRoomPage from "./container/pages/landlord/LandlordUpdateRoomPage";
 
 function App() {
   return (
@@ -88,6 +89,10 @@ function App() {
             <Route
               path={PATHS.landlordAddRooms}
               element={<LandlordAddRoomPage />}
+            ></Route>
+            <Route
+              path={`${PATHS.landlordRooms}/:roomId`}
+              element={<LandlordUpdateRoomPage />}
             ></Route>
             <Route
               path={PATHS.landlordSubscriptions}
