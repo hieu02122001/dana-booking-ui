@@ -7,6 +7,7 @@ import AdminUserPage from "./container/pages/admin/AdminUserPage";
 import AdminAddUserPage from "./container/pages/admin/AdminAddUserPage";
 import AdminHousePage from "./container/pages/admin/AdminHousePage";
 import AdminAddHousePage from "./container/pages/admin/AdminAddHousePage";
+import AdminUpdateHousePage from "./container/pages/admin/AdminUpdateHousePage";
 import AdminSubsPage from "./container/pages/admin/AdminSubsPage";
 import AdminAddSubsPage from "./container/pages/admin/AdminAddSubsPage";
 /// LANDLORD
@@ -55,6 +56,10 @@ function App() {
             <Route
               path={PATHS.adminAddHouses}
               element={<AdminAddHousePage />}
+            ></Route>
+            <Route
+              path={`${PATHS.adminHouses}/:houseId`}
+              element={<AdminUpdateHousePage />}
             ></Route>
             <Route
               path={PATHS.adminSubscriptions}

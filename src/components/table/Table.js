@@ -60,7 +60,7 @@ const Table = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
                       <div className="flex flex-row w-full justify-end gap-2 mt-auto">
                         <Button
                           bg="bg-cyan-400"
-                          onClick={() => navigate(`${linkTo}${item.id}`)}
+                          onClick={() => navigate(`${item.id}`)}
                         >
                           <TbEdit />
                         </Button>

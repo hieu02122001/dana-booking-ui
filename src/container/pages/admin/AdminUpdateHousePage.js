@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import { toast } from "react-toastify";
 import http from "../../../config/axiosConfig";
@@ -24,7 +24,7 @@ const schema = yup.object({
   address: yup.string().required("Hãy nhập địa chỉ"),
   description: yup.string(),
 });
-const AdminAddHousePage = () => {
+const AdminUpdateHousePage = () => {
   const {
     handleSubmit,
     control,
@@ -32,7 +32,8 @@ const AdminAddHousePage = () => {
     getValues,
     formState: { errors },
     watch,
-    register
+    register,
+    reset
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onSubmit",
@@ -52,6 +53,8 @@ const AdminAddHousePage = () => {
   const [districts, setDistricts] = useState([]);
   const [district, setDistrict] = useState("");
   const [imageFiles, setImageFiles] = useState("");
+  const params = useParams();
+  const {houseId} = params;
   //
   useEffect(() => {
     const errorsList = Object.values(errors);
@@ -67,6 +70,27 @@ const AdminAddHousePage = () => {
         setDistricts(res?.data?.rows);
       })
       .catch((err) => console.log(err));
+
+    http
+      .get(`${PATHS.adminHouses}/${houseId}`)
+      .then((res) => {
+        const houseDetail = res?.data;
+        reset({
+          name: houseDetail.name,
+          userId: houseDetail.userId,
+          image: houseDetail.image,
+          address: houseDetail.address,
+          district: houseDetail.district?._id,
+          description: houseDetail.description
+        })
+        console.log(houseDetail);
+        setDistrict(houseDetail.district?.name);
+        setOwnerEmail(houseDetail.owner?.email);
+        const listFiles = { file: {name: houseDetail?.image }, url: houseDetail?.image };
+        setImageFiles([listFiles]);
+      })
+      .catch((err) => console.log(err));
+
   }, []);
   //
   const handleDistrictSelect = (item) => {
@@ -92,14 +116,14 @@ const AdminAddHousePage = () => {
     const houseObj = {
       name: values.name,
       userId: values.userId,
-      image: imageFiles[0].url,
       district: values.district,
+      image: imageFiles[0].url,
       address: values.address,
       description: values.description,
     };
     setIsLoading(true);
     await http
-      .post(PATHS.adminHouses, houseObj)
+      .put(`${PATHS.adminHouses}/${houseId}`, houseObj)
       .then((res) => {
         navigate(PATHS.adminHouses);
         setIsLoading(false);
@@ -186,4 +210,4 @@ const AdminAddHousePage = () => {
   );
 };
 
-export default AdminAddHousePage;
+export default AdminUpdateHousePage;
