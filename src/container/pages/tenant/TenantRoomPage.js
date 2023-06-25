@@ -1,80 +1,79 @@
-import { useNavigate, useParams } from "react-router-dom";
-import CardRoom from "../../../components/Card/CardRoom";
-import { useEffect, useState } from "react";
-import { useAuth } from "../../../context/authContext";
-import { PATHS } from "../../../utils/paths";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Search from "../../../components/search/Search";
 import http from "../../../config/axiosConfig";
-import { Button } from "@chakra-ui/react";
-import { BsFillDoorOpenFill } from "react-icons/bs";
+import { useSearch } from "../../../context/search-context";
+import Loading from "../../../components/loading/Loading";
+import { PATHS } from "../../../utils/paths";
+import CardRoomTenant from "../../../components/Card/CardRoomTenant";
 
-export default function TenantRoomPage() {
+const TenantRoomPage = () => {
+  const [rooms, setRooms] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { search } = useSearch();
   const navigate = useNavigate();
-  const [roomList, setRoomList] = useState([]);
-  const { houseId } = useParams();
-  const [houseName, setHouseName] = useState("");
-  const { user } = useAuth();
 
-  http
-    .get(`${PATHS.landlordHouses}/${houseId}`)
-    .then((res) => {
-      setHouseName(res.data.name);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  const getRoomList = () => {
-    if (!localStorage.token) {
-      navigate(PATHS.landlordLogin);
-    }
+  useEffect(() => {
+    setIsLoading(true);
+    const district = search.districtId;
     http
-      .get(`${PATHS.landlordRooms}?houseId=${houseId}`)
+      .get(`${PATHS.tenantRooms}?district=${district}`)
       .then((res) => {
         const list = res?.data?.rows?.map((item) => {
-          const houses = {
+          const rooms = {
             id: item.id,
             name: item.name,
             houseId: item.houseId,
-            userId: item.userId,
-            user: item.user || null,
-            images: item.images,
             price: item.price,
-            description: item.description || "(NONE)",
+            images: item.images,
+            description: item.description,
+            isRented: item.isRented,
+            isAds: item.isAds,
+            houseName: item?.house?.name,
+            houseAddress: item?.house?.address,
+            houseImage: item?.house?.image,
+            houseDescription: item?.house?.description,
             createdAt: item.createdAt,
             updatedAt: item.updatedAt,
           };
-          return houses;
+          return rooms;
         });
-        setRoomList(list);
+        setRooms(list);
+        setIsLoading(false);
+        console.log(list);
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
       });
+  }, [search.districtId]);
+  const handleSearch = (values) => {
+    // setIsLoading(true);
+    const district = search.districtId;
   };
-  //
-  useEffect(() => {
-    getRoomList();
-  }, [user]);
-  //
+
   return (
-    <div>
-      <div className="flex flex-row justify-between">
-        <h1 className="font-bold text-2xl text-primary">{houseName}</h1>
-        <Button
-          leftIcon={<BsFillDoorOpenFill />}
-          onClick={() =>
-            navigate(PATHS.landlordAddRooms, { state: { houseId } })
-          }
-          className="ml-auto"
-          colorScheme="green"
-          variant="outline"
-        >
-          Thêm
-        </Button>
+    <div className="flex flex-row w-full relative">
+      <div className="px-8 py-5 bg-opacity-20  w-[25%] shadow-lg h-[720px] sticky top-0 border border-slate-100">
+        <Search handleSearch={handleSearch} col={true} />
       </div>
-      {roomList.map((item) => {
-        return <CardRoom data={item} key={item.id} />;
-      })}
+      <div className="w-[75%] px-5 border">
+        <h1 className="text-2xl font-bold mb-5 mt-5">
+          Cho Thuê Phòng Trọ, Giá Rẻ, Tiện Nghi, Mới Nhất 2023
+        </h1>
+        {isLoading ? (
+          <Loading></Loading>
+        ) : (
+          <div className="grid grid-cols-3 gap-1 ">
+            {rooms.length > 0 &&
+              rooms.map((item) => {
+                return <CardRoomTenant key={item.id} data={item} />;
+              })}
+          </div>
+        )}
+      </div>
     </div>
   );
-}
+};
+
+export default TenantRoomPage;

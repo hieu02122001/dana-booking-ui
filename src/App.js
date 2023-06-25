@@ -24,7 +24,7 @@ import LandlordAddRoomPage from "./container/pages/landlord/LandlordAddRoomPage"
 import TenantLayout from "./container/layout/tenant/TenantLayout";
 import TenantHomePage from "./container/pages/tenant/TenantHomePage";
 import TenantLoginPage from "./container/pages/tenant/TenantLoginPage";
-import TenantHousePage from "./container/pages/tenant/TenantHousePage";
+import TenantRoomPage from "./container/pages/tenant/TenantRoomPage";
 import LandlordSubsPage from "./container/pages/landlord/LandlordSubsPage";
 import LandlordAddSubsPage from "./container/pages/landlord/LandlordAddSubsPage";
 import { SearchProvider } from "./context/search-context";
@@ -94,12 +94,12 @@ function App() {
           <Route path={PATHS.tenantBase} element={<TenantLayout />}>
             <Route path={PATHS.tenantBase} element={<TenantHomePage />}></Route>
             <Route
-              path={PATHS.tenantHouses}
-              element={<TenantHousePage />}
-            ></Route>
-            <Route
               path={`${PATHS.tenantHouses}/:houseId`}
               element={<TenantHouseDetailPage />}
+            ></Route>
+            <Route
+              path={`${PATHS.tenantRooms}`}
+              element={<TenantRoomPage />}
             ></Route>
             <Route
               path={`${PATHS.tenantRooms}/:roomId`}

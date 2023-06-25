@@ -35,7 +35,7 @@ const Dropdown = () => {
         districtName: district.name
       }
     })
-    navigate(PATHS.tenantHouses);
+    navigate(PATHS.tenantRooms);
   };
 
   return (

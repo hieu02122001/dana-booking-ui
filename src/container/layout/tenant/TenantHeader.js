@@ -35,7 +35,7 @@ const TenantHeader = () => {
       name: "Trang chủ",
     },
     {
-      url: PATHS.tenantHouses,
+      url: PATHS.tenantRooms,
       name: "Khám phá",
     },
     {
