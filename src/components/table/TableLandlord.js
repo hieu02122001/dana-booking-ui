@@ -3,6 +3,7 @@ import { TbEdit, TbTrashXFilled } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
 import SubsRunning from "../dialog/SubsRunning";
+import BookingPending from "../dialog/BookingPending";
 
 const Table = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
   const navigate = useNavigate();
@@ -39,6 +40,12 @@ const Table = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
                           <td key={i}>
                             {value === "FAIL" ? (
                               <span style={{ color: "#d75a64" }}>THẤT BẠI</span>
+                            ) : value === "REJECTED" ? (
+                              <span style={{ color: "#d75a64" }}>TỪ CHỐI</span>
+                            ) : value === "APPROVED" ? (
+                              <span style={{ color: "#0A6EBD" }}>ĐÃ XÁC NHẬN</span>
+                            ) : value === "PENDING" ? (
+                              <BookingPending data={item}/>
                             ) : value === "SUCCESS" ? (
                               <span style={{ color: "#16FF00" }}>THÀNH CÔNG</span>
                             ) : value === "RUNNING" ? (

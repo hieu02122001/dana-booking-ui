@@ -19,11 +19,11 @@ const LandlordSubsPage = () => {
   //
   const getSubsList = () => {
     if (!localStorage.token) {
-      navigate(PATHS.adminLogin);
+      navigate(PATHS.landlordLogin);
     }
     setIsLoading(true);
     http
-      .get(`${PATHS.adminSubscriptions}?page=${page}&userId=${user.id}`)
+      .get(`${PATHS.landlordSubscriptions}?page=${page}&userId=${user.id}`)
       .then((res) => {
         console.log(res.data);
         const list = res?.data?.rows?.map((item) => {
