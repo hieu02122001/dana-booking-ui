@@ -159,15 +159,14 @@ const TenantRoomDetailPage = () => {
                 </div>
                 <button
                   onClick={handleRentNow}
-                  className="w-full py-3 rounded-full bg-primary text-white font-semibold disabled:bg-grayLight"
-                  disabled={!!roomDetail?.userId}
+                  className="w-full py-3 rounded-full bg-cyan-400 text-white font-semibold disabled:bg-grayLight"
                 >
                   Thuê ngay
                 </button>
               </div>
               {showBooking && (
                 <RentRoomForm
-                  locationId={locationId}
+                  houseId={houseDetail.id}
                   roomId={roomId}
                   roomDetail={roomDetail}
                 />

@@ -30,6 +30,7 @@ import LandlordAddSubsPage from "./container/pages/landlord/LandlordAddSubsPage"
 import { SearchProvider } from "./context/search-context";
 import TenantHouseDetailPage from "./container/pages/tenant/TenantHouseDetailPage";
 import TenantRoomDetailPage from "./container/pages/tenant/TenantRoomDetailPage";
+import LandlordBookingPage from "./container/pages/landlord/LandlordBookingPage";
 
 function App() {
   return (
@@ -88,6 +89,10 @@ function App() {
             <Route
               path={PATHS.landlordAddSubscriptions}
               element={<LandlordAddSubsPage />}
+            ></Route>
+            <Route
+              path={PATHS.landlordBookings}
+              element={<LandlordBookingPage />}
             ></Route>
           </Route>
           <Route path={PATHS.tenantLogin} element={<TenantLoginPage />}></Route>

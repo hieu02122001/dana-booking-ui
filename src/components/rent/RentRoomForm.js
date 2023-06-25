@@ -5,51 +5,38 @@ import "react-datetime/css/react-datetime.css";
 import DatePicker from "react-datetime";
 import { toast } from "react-toastify";
 import RentModal from "./RentModal";
-import moment from "moment";
+import { PATHS } from "../../utils/paths";
+import { useAuth } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
-const RentRoomForm = ({ locationId, roomId, roomDetail }) => {
-  const [utilities, setUtilities] = useState([]);
+const RentRoomForm = ({ houseId, roomId, roomDetail }) => {
+  console.log(roomDetail);
+  const { user } = useAuth();
   const [monthRent, setMonthRent] = useState(1);
   const [date, setDate] = useState();
-  const [location, setLocation] = useState();
+  const [house, setHouse] = useState();
   const [showModalRent, setShowModalRent] = useState(false);
   useEffect(() => {
-    http.get(`booking/locations/${locationId}`).then((res) => {
-      setLocation(res.data);
+    http.get(`${PATHS.tenantHouses}/${houseId}`).then((res) => {
+      setHouse(res.data);
     });
-  }, [locationId]);
+  }, [houseId]);
 
+  const handleDateSelect = (data) => {
+    setDate(data)
+  }
   const handleNextStep = (e) => {
     e.preventDefault();
     if (!date) {
       toast.error("Hãy chọn ngày bắt đầu!");
       return;
     }
-    const utilitiesClient = [];
-    utilities.forEach((utility) => {
-      if (utility.checked === true) utilitiesClient.push(utility.value);
-    });
-    const booking = {
-      roomId: roomId,
-      startDay: date.toISOString(),
-      monthNumber: monthRent,
-      utilities: utilitiesClient,
-    };
-
+    console.log(date);
     setShowModalRent(true);
   };
   const monthRentNumber = (e) => {
     if (e.target.value < 1) return;
     setMonthRent(e.target.value);
-  };
-  const disableDate = (current, selectedDate) => {
-    if (!roomDetail.availableDay) return;
-    let availableDate = new Date(roomDetail.availableDay);
-    let currentDate = new Date();
-    const disableDate =
-      currentDate > availableDate ? currentDate : availableDate;
-    if (disableDate > new Date(current)) return false;
-    return true;
   };
   return (
     <>
@@ -57,10 +44,9 @@ const RentRoomForm = ({ locationId, roomId, roomDetail }) => {
         <RentModal
           handleClose={() => setShowModalRent(false)}
           roomDetail={roomDetail}
-          locationDetail={location}
-          startDate={date}
-          monthRent={monthRent}
-          utilities={utilities}
+          userId={user.id}
+          checkInDate={date}
+          months={monthRent}
         />
       )}
       <form
@@ -70,12 +56,11 @@ const RentRoomForm = ({ locationId, roomId, roomDetail }) => {
         <Label>Ngày bắt đầu:</Label>
         <div className="date_picker_wrapper mb-5 ">
           <DatePicker
-            onChange={(date) => setDate(date)}
+            onChange={handleDateSelect}
             value={date}
             dateFormat="DD/MM/YYYY"
             timeFormat={false}
             className="datePicker"
-            isValidDate={disableDate}
             closeOnSelect={true}
             inputProps={{ readOnly: true }}
           />
@@ -91,7 +76,7 @@ const RentRoomForm = ({ locationId, roomId, roomDetail }) => {
         </div>
         <button
           type="submit"
-          className="w-full py-3 rounded-full bg-primary text-white font-semibold mt-5"
+          className="w-full py-3 rounded-full bg-green-600 text-white font-semibold mt-5"
         >
           Bước tiếp theo
         </button>

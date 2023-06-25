@@ -9,6 +9,7 @@ import {
   MdCalendarToday,
   MdFormatListBulleted,
   MdOutlineCheckCircleOutline,
+  MdAttachMoney,
 } from "react-icons/md";
 import { IoMdPricetag } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
@@ -16,48 +17,40 @@ import { toast } from "react-toastify";
 import http from "../../config/axiosConfig";
 import { useState } from "react";
 import Button from "../button/Button";
+import { PATHS } from "../../utils/paths";
 
 const RentModal = ({
   handleClose,
   roomDetail,
-  locationDetail,
-  startDate,
-  monthRent,
-  utilities,
+  userId,
+  checkInDate,
+  months,
 }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   if (typeof document === "undefined") return <div className="Modal"></div>;
-  const utilitiesClient = [];
-  utilities.forEach((utility) => {
-    if (utility.checked === true) utilitiesClient.push(utility.value);
-  });
-  const startDateShow = moment(startDate).format("DD-MM-YYYY").toString();
-  const endDate = moment(startDate)
-    .add(monthRent, "months")
-    .format("DD-MM-YYYY")
+  const checkInDateShow = moment(checkInDate).format("DD/MM/YYYY").toString();
+  const endDate = moment(checkInDate)
+    .add(months, "months")
+    .format("DD/MM/YYYY")
     .toString();
   const handleRent = () => {
     setIsLoading(true);
-    const utitlitiesPriceInt = utilitiesClient.map((item) => {
-      return {
-        ...item,
-        price: item.priceInt,
-      };
-    });
     const booking = {
+      houseId: roomDetail.houseId,
       roomId: roomDetail.id,
-      startDay: new Date(startDate).toLocaleDateString(),
-      monthNumber: monthRent,
-      utilities: utitlitiesPriceInt,
+      userId: userId,
+      totalPrice: roomDetail.price,
+      checkInDate: checkInDate,
+      checkOutDate: moment(checkInDate).add(months, "months"),
     };
     console.log(booking);
     http
-      .post(`booking/bookings`, booking)
+      .post(`${PATHS.tenantBookings}`, booking)
       .then((res) => {
-        toast.success("Booking success");
+        toast.success("Đặt phòng thành công!");
         setIsLoading(false);
-        navigate("/booking/1");
+        navigate(`${PATHS.tenantBookings}?userId=${userId}`);
       })
       .catch((e) => {
         console.log(e);
@@ -74,72 +67,55 @@ const RentModal = ({
       >
         <AiOutlineCloseCircle className="w-full h-full" />
       </div>
-      <div className="relative z-10 rounded-lg w-full max-w-[500px] h-[550px]  bg-slate-100 px-5 py-5 flex flex-col">
+      <div className="relative z-10 rounded-lg w-full max-w-[500px] h-[350px]  bg-slate-100 px-5 py-5 flex flex-col">
         <h2 className="font-bold text-3xl text-center text-primary">
-          YOUR BOOKING
+          XÁC NHẬN ĐẶT PHÒNG
         </h2>
         <p className="font-semibold text-xl text-center mt-4">
-          {locationDetail?.name}
+          {roomDetail?.house?.name}
         </p>
         <div className="flex flex-col gap-2 mt-5">
           <div className="flex flex-row gap-2 items-start">
             <div className="flex flex-row gap-2 items-center">
               <MdLocationPin />
-              <span className="font-semibold">Location:</span>
+              <span className="font-semibold">Địa chỉ:</span>
             </div>
             <span>
-              {`${locationDetail?.address}, ${locationDetail?.wards}, ${locationDetail?.district}, ${locationDetail?.city}`}
+              {`${roomDetail?.house?.address}`}
             </span>
           </div>
           <div>
             <div className="flex flex-row gap-2 items-center">
               <MdMeetingRoom />
-              <span className="font-semibold">Room name:</span>
+              <span className="font-semibold">Tên phòng:</span>
               <span>{roomDetail?.name}</span>
             </div>
           </div>
           <div>
             <div className="flex flex-row gap-2 items-center">
-              <MdPeople />
-              <span className="font-semibold">Capacity:</span>
-              <span>{roomDetail?.capacity}</span>
+              <MdAttachMoney />
+              <span className="font-semibold">Giá phòng:</span>
+              <span>{`${roomDetail?.price}đ`}</span>
             </div>
           </div>
           <div>
             <div className="flex flex-row gap-2 items-center">
               <MdCalendarToday />
-              <span className="font-semibold">Start Date:</span>
-              <span>{startDateShow}</span>
+              <span className="font-semibold">Ngày bắt đầu:</span>
+              <span>{checkInDateShow}</span>
             </div>
           </div>
           <div>
             <div className="flex flex-row gap-2 items-center">
               <MdCalendarToday />
-              <span className="font-semibold">End Date:</span>
+              <span className="font-semibold">Ngày kết thúc:</span>
               <span>{endDate}</span>
-            </div>
-          </div>
-          <div>
-            <div className="flex flex-row gap-2 items-center">
-              <MdFormatListBulleted />
-              <span className="font-semibold">Utilities:</span>
-            </div>
-            <div className="mt-3 ml-5">
-              {utilitiesClient.map((item) => {
-                return (
-                  <div className="flex flex-row gap-2 items-center">
-                    <IoMdPricetag />
-                    <span className="font-medium">{item.name}:</span>
-                    <span>{item.price} VND</span>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </div>
         <div className="w-full mt-auto flex items-center justify-center">
           <Button onClick={handleRent} isLoading={isLoading}>
-            Create
+            Đặt phòng
           </Button>
         </div>
       </div>
