@@ -31,6 +31,8 @@ import { SearchProvider } from "./context/search-context";
 import TenantHouseDetailPage from "./container/pages/tenant/TenantHouseDetailPage";
 import TenantRoomDetailPage from "./container/pages/tenant/TenantRoomDetailPage";
 import LandlordBookingPage from "./container/pages/landlord/LandlordBookingPage";
+import TenantBookingPage from "./container/pages/tenant/TenantBookingPage";
+import BookingLayout from "./container/bookingLayout/BookingLayout";
 
 function App() {
   return (
@@ -110,6 +112,12 @@ function App() {
               path={`${PATHS.tenantRooms}/:roomId`}
               element={<TenantRoomDetailPage />}
             ></Route>
+            <Route path={PATHS.tenantBookings} element={<BookingLayout />}>
+              <Route
+                path={`${PATHS.tenantBookings}/:status`}
+                element={<TenantBookingPage />}
+              ></Route>
+            </Route>
           </Route>
         </Routes>
       </SearchProvider>
