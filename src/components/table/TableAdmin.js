@@ -2,7 +2,6 @@ import React from "react";
 import { TbEdit, TbTrashXFilled } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
-import Ready from "../dialog/Ready";
 
 const Admin = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
   const navigate = useNavigate();
