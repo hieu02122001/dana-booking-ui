@@ -66,7 +66,7 @@ const TenantHousePage = () => {
           <div className="grid grid-cols-3 gap-1 ">
             {houses.length > 0 &&
               houses.map((item) => {
-                return <CardHouseTenant data={item} />;
+                return <CardHouseTenant key={item.id} data={item} />;
               })}
           </div>
         )}

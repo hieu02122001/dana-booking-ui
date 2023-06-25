@@ -59,7 +59,7 @@ const AdminAddSubsPage = () => {
   };
   const handleClickHouse = (item) => {
     http
-    .get(`${PATHS.landlordRooms}?houseId=${item.id}`)
+    .get(`${PATHS.landlordRooms}?houseId=${item.id}&&isAds=${false}`)
     .then((res) => {
       setRooms(res.data?.rows);
       setIsLoading(false);
