@@ -41,6 +41,7 @@ import AdminProfilePage from "./container/pages/admin/AdminProfilePage";
 import LandlordProfilePage from "./container/pages/landlord/LandlordProfilePage";
 import TenantProfilePage from "./container/pages/tenant/TenantProfilePage";
 import TenantRegisterPage from "./container/pages/tenant/TenantRegisterPage";
+import LandlordRegisterPage from "./container/pages/landlord/LandlordRegisterPage";
 
 function App() {
   return (
@@ -87,6 +88,10 @@ function App() {
             path={PATHS.landlordLogin}
             element={<LandlordLoginPage />}
           ></Route>
+          <Route
+              path={PATHS.landlordRegister}
+              element={<LandlordRegisterPage />}
+            ></Route>
           <Route path={PATHS.landlordBase} element={<LandlordLayout />}>
             <Route
               path={PATHS.landlordProfile}

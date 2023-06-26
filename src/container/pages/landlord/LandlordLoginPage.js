@@ -115,7 +115,7 @@ const LandlordLoginPage = () => {
           </form>
           <div className="text-sm flex justify-center text-grayCustom">
             <span className="inline-block mr-1">Chưa có tài khoản?</span>
-            <NavLink to={"/register"} className="font-semibold cursor-pointer">
+            <NavLink to={PATHS.landlordRegister} className="font-semibold cursor-pointer">
               Đăng ký
             </NavLink>
           </div>
