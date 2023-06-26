@@ -58,9 +58,6 @@ const TenantLoginPage = () => {
       });
   }
 
-  // function get  room status when login success!
-  // move this function when UI Success!
-
   return (
     <div className="minH-[100vh] h-[100vh] w-full flex justify-center items-center bg-grayLight">
       <div className="w-[70%] h-[90%] shadow-2xl flex flex-row bg-white">
@@ -115,7 +112,7 @@ const TenantLoginPage = () => {
           </form>
           <div className="text-sm flex justify-center text-grayCustom">
             <span className="inline-block mr-1">Chưa có tài khoản?</span>
-            <NavLink to={"/register"} className="font-semibold cursor-pointer">
+            <NavLink to={PATHS.tenantRegister} className="font-semibold cursor-pointer">
               Đăng ký
             </NavLink>
           </div>

@@ -24,6 +24,8 @@ const TenantHeader = () => {
       });
       setShow(false);
       navigate(PATHS.tenantLogin);
+    } else {
+      navigate(PATHS.tenantLogin);
     }
   };
   const items = [
@@ -92,12 +94,13 @@ const TenantHeader = () => {
       </div>
       {show && (
         <div className="cursor-pointer w-[200px] absolute -bottom-8 right-1 translate-y-[50%] z-20 shadow-xl border-slate-200 border drop-shadow-2xl rounded-xl bg-white">
-          <div
+          {user?.id && <div
             onClick={handleProfileClick}
             className="w-full px-3 py-3 hover:bg-purple-100 rounded-xl"
           >
             Cá nhân
-          </div>
+          </div>}
+          
           <div
             className="w-full  px-3 py-3 hover:bg-purple-100 rounded-xl"
             onClick={handleSignInOut}

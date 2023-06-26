@@ -4,6 +4,8 @@ export const PATHS = {
   // FILTER
   filterDistrict: "/filter/districts",
   filterLandlord: "/filter/landlords",
+  // ROOT
+  users: "/users",
   // ADMIN
   adminProfile: "/admin/me",
   adminBase: "/admin",
@@ -33,6 +35,7 @@ export const PATHS = {
   // TENANT
   tenantBase: "/tenant",
   tenantProfile: "/tenant/me",
+  tenantRegister: "/tenant/register",
   tenantLogin: "/tenant/login",
   tenantHouses: "/tenant/houses",
   tenantRooms: "/tenant/rooms",
