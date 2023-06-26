@@ -231,7 +231,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
               <MenuItem>
-                <NavLink to={PATHS.adminProfile}>Cá nhân</NavLink>
+                <NavLink to={PATHS.landlordProfile}>Cá nhân</NavLink>
               </MenuItem>
               <MenuDivider />
               <MenuItem onClick={signOutClickHandle}>Đăng xuất</MenuItem>

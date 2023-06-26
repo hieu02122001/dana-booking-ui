@@ -38,6 +38,7 @@ import LandlordUpdateHousePage from "./container/pages/landlord/LandlordUpdateHo
 import LandlordUpdateRoomPage from "./container/pages/landlord/LandlordUpdateRoomPage";
 import AdminUpdateUserPage from "./container/pages/admin/AdminUpdateUserPage";
 import AdminProfilePage from "./container/pages/admin/AdminProfilePage";
+import LandlordProfilePage from "./container/pages/landlord/LandlordProfilePage";
 
 function App() {
   return (
@@ -85,6 +86,10 @@ function App() {
             element={<LandlordLoginPage />}
           ></Route>
           <Route path={PATHS.landlordBase} element={<LandlordLayout />}>
+            <Route
+              path={PATHS.landlordProfile}
+              element={<LandlordProfilePage />}
+            ></Route>
             <Route
               path={PATHS.landlordHouses}
               element={<LandlordHousePage />}
