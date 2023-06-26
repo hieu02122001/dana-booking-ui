@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaHouseUser } from "react-icons/fa";
 import { useAuth } from "../../../context/authContext";
 import { PATHS } from "../../../utils/paths";
+import { Avatar } from "@chakra-ui/react";
 
 const TenantHeader = () => {
   const { user, setUser } = useAuth();
@@ -20,7 +20,7 @@ const TenantHeader = () => {
         fullName: "",
         email: "",
         phone: "",
-        userType: ""
+        userType: "",
       });
       setShow(false);
       navigate(PATHS.tenantLogin);
@@ -40,6 +40,10 @@ const TenantHeader = () => {
       name: "Đặt phòng",
     },
   ];
+
+  function handleProfileClick() {
+    navigate(PATHS.tenantProfile);
+  }
   return (
     <div className="relative header w-[100%] minH-[70px] h-[80px] max-w-[1300px] bg-white flex flex-row items-center mx-auto bg-noColor">
       <div
@@ -71,8 +75,13 @@ const TenantHeader = () => {
         ))}
       </div>
       <div className="flex flex-row gap-2 relative ml-auto">
-        <FaHouseUser
-          className="text-3xl cursor-pointer text-primary"
+        <Avatar
+          size={"sm"}
+          src={
+            user.image ||
+            "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+          }
+          className="cursor-pointer"
           onClick={() => {
             setShow((prev) => !prev);
           }}
@@ -84,7 +93,7 @@ const TenantHeader = () => {
       {show && (
         <div className="cursor-pointer w-[200px] absolute -bottom-8 right-1 translate-y-[50%] z-20 shadow-xl border-slate-200 border drop-shadow-2xl rounded-xl bg-white">
           <div
-            onClick={() => navigate(PATHS.manage)}
+            onClick={handleProfileClick}
             className="w-full px-3 py-3 hover:bg-purple-100 rounded-xl"
           >
             Cá nhân

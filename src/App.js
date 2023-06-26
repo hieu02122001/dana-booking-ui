@@ -39,6 +39,7 @@ import LandlordUpdateRoomPage from "./container/pages/landlord/LandlordUpdateRoo
 import AdminUpdateUserPage from "./container/pages/admin/AdminUpdateUserPage";
 import AdminProfilePage from "./container/pages/admin/AdminProfilePage";
 import LandlordProfilePage from "./container/pages/landlord/LandlordProfilePage";
+import TenantProfilePage from "./container/pages/tenant/TenantProfilePage";
 
 function App() {
   return (
@@ -130,6 +131,10 @@ function App() {
           <Route path={PATHS.tenantLogin} element={<TenantLoginPage />}></Route>
           <Route path={PATHS.tenantBase} element={<TenantLayout />}>
             <Route path={PATHS.tenantBase} element={<TenantHomePage />}></Route>
+            <Route
+              path={PATHS.tenantProfile}
+              element={<TenantProfilePage />}
+            ></Route>
             <Route
               path={`${PATHS.tenantHouses}/:houseId`}
               element={<TenantHouseDetailPage />}
