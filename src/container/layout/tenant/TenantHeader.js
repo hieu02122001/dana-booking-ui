@@ -41,6 +41,10 @@ const TenantHeader = () => {
       url: PATHS.tenantBookings,
       name: "Đặt phòng",
     },
+    {
+      url: PATHS.tenantContact,
+      name: "Liên hệ",
+    },
   ];
 
   function handleProfileClick() {

@@ -6,6 +6,7 @@ export const PATHS = {
   filterLandlord: "/filter/landlords",
   // ROOT
   users: "/users",
+  contactAuth: "/contact/authenticate",
   // ADMIN
   adminProfile: "/admin/me",
   adminBase: "/admin",
@@ -32,6 +33,7 @@ export const PATHS = {
   landlordBookings: "/landlord/bookings",
   landlordSubscriptions: "/landlord/subscriptions",
   landlordAddSubscriptions: "/landlord/subscriptions/add",
+  landlordContact: "/landlord/contact",
   // TENANT
   tenantBase: "/tenant",
   tenantProfile: "/tenant/me",
@@ -40,4 +42,5 @@ export const PATHS = {
   tenantHouses: "/tenant/houses",
   tenantRooms: "/tenant/rooms",
   tenantBookings: "/tenant/bookings",
+  tenantContact: "/tenant/contact"
 };

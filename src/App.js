@@ -42,6 +42,7 @@ import LandlordProfilePage from "./container/pages/landlord/LandlordProfilePage"
 import TenantProfilePage from "./container/pages/tenant/TenantProfilePage";
 import TenantRegisterPage from "./container/pages/tenant/TenantRegisterPage";
 import LandlordRegisterPage from "./container/pages/landlord/LandlordRegisterPage";
+import TenantContactPage from "./container/pages/tenant/TenantContactPage";
 
 function App() {
   return (
@@ -89,9 +90,9 @@ function App() {
             element={<LandlordLoginPage />}
           ></Route>
           <Route
-              path={PATHS.landlordRegister}
-              element={<LandlordRegisterPage />}
-            ></Route>
+            path={PATHS.landlordRegister}
+            element={<LandlordRegisterPage />}
+          ></Route>
           <Route path={PATHS.landlordBase} element={<LandlordLayout />}>
             <Route
               path={PATHS.landlordProfile}
@@ -163,6 +164,10 @@ function App() {
                 element={<TenantBookingPage />}
               ></Route>
             </Route>
+            <Route
+              path={`${PATHS.tenantContact}`}
+              element={<TenantContactPage />}
+            ></Route>
           </Route>
         </Routes>
       </SearchProvider>
