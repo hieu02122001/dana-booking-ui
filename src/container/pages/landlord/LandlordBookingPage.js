@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Table from "../../../components/table/TableLandlord";
-import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import http from "../../../config/axiosConfig";
 import { PATHS } from "../../../utils/paths";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
-import { AiFillFolderAdd } from "react-icons/ai";
 
 const LandlordBookingPage = () => {
   const navigate = useNavigate();
   const [bookingList, setBookingList] = useState([]);
   const { user } = useAuth();
+  const userId = user.id;
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +21,7 @@ const LandlordBookingPage = () => {
     }
     setIsLoading(true);
     http
-      .get(`${PATHS.landlordBookings}?page=${page}&landlordId=${user.id}`)
+      .get(`${PATHS.landlordBookings}?page=${page}&landlordId=${userId}`)
       .then((res) => {
         console.log(res.data);
         const list = res?.data?.rows?.map((item) => {
@@ -61,7 +60,7 @@ const LandlordBookingPage = () => {
   //
   useEffect(() => {
     getSubsList();
-  }, [page, user]);
+  }, [page, userId]);
   //
   const head = [
     "Tên Nhà trọ",

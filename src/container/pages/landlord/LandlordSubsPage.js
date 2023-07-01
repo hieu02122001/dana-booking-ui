@@ -13,6 +13,7 @@ const LandlordSubsPage = () => {
   const navigate = useNavigate();
   const [subsList, setSubsList] = useState([]);
   const { user } = useAuth();
+  const userId = user.id;
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +24,7 @@ const LandlordSubsPage = () => {
     }
     setIsLoading(true);
     http
-      .get(`${PATHS.landlordSubscriptions}?page=${page}&userId=${user.id}`)
+      .get(`${PATHS.landlordSubscriptions}?page=${page}&userId=${userId}`)
       .then((res) => {
         console.log(res.data);
         const list = res?.data?.rows?.map((item) => {
@@ -62,7 +63,7 @@ const LandlordSubsPage = () => {
   //
   useEffect(() => {
     getSubsList();
-  }, [page, user]);
+  }, [page, userId]);
   //
   const head = [
     "Tên Nhà trọ",
