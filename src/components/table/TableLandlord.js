@@ -2,8 +2,8 @@ import React from "react";
 import { TbEdit, TbTrashXFilled } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
-import SubsRunning from "../dialog/SubsRunning";
 import BookingPending from "../dialog/BookingPending";
+import SubsReady from "../dialog/SubsReady";
 
 const Table = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
   const navigate = useNavigate();
@@ -43,13 +43,21 @@ const Table = ({ head, data, linkTo, handleDelete, isLoading = false }) => {
                             ) : value === "REJECTED" ? (
                               <span style={{ color: "#d75a64" }}>TỪ CHỐI</span>
                             ) : value === "APPROVED" ? (
-                              <span style={{ color: "#0A6EBD" }}>ĐÃ XÁC NHẬN</span>
+                              <span style={{ color: "#0A6EBD" }}>
+                                ĐÃ XÁC NHẬN
+                              </span>
                             ) : value === "PENDING" ? (
-                              <BookingPending data={item}/>
+                              <BookingPending data={item} />
                             ) : value === "SUCCESS" ? (
-                              <span style={{ color: "#16FF00" }}>THÀNH CÔNG</span>
+                              <span style={{ color: "#16FF00" }}>
+                                THÀNH CÔNG
+                              </span>
                             ) : value === "RUNNING" ? (
-                              <SubsRunning data={item}/>
+                              <span style={{ color: "#0A6EBD" }}>
+                                ĐANG HOẠT ĐỘNG
+                              </span>
+                            ) : value === "READY" ? (
+                              <SubsReady data={item} />
                             ) : (
                               <span>{value}</span>
                             )}

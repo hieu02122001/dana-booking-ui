@@ -3,10 +3,10 @@ import React from "react"
 import http from "../../config/axiosConfig";
 import { PATHS } from "../../utils/paths";
 
-export default function SubsRunning({ data }) {
+export default function SubsReady({ data }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = React.useRef()
-  function handleYesClick () {
+  function handleNoClick () {
     console.log(data);
     http
       .put(`${PATHS.landlordSubscriptions}/${data.id}/status/fail`)
@@ -17,9 +17,21 @@ export default function SubsRunning({ data }) {
         console.log(err);
       });
   }
+
+  function handleYesClick () {
+    console.log(data);
+    http
+      .put(`${PATHS.landlordSubscriptions}/${data.id}/status/running`)
+      .then((res) => {
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   return (
     <>
-      <Button size="xs" colorScheme="yellow" onClick={onOpen}>HOẠT ĐỘNG</Button>
+      <Button size="xs" colorScheme="yellow" onClick={onOpen}>SẴN SÀNG</Button>
       <AlertDialog
         motionPreset='slideInBottom'
         leastDestructiveRef={cancelRef}
@@ -30,16 +42,19 @@ export default function SubsRunning({ data }) {
         <AlertDialogOverlay />
 
         <AlertDialogContent>
-          <AlertDialogHeader>Huỷ dịch vụ?</AlertDialogHeader>
+          <AlertDialogHeader>Xác nhận dịch vụ?</AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
-            Bạn có chắc chắn muốn huỷ dịch vụ?
+            Bạn vui lòng nhấn Có nếu muốn bắt đầu dịch vụ hoặc nhấn Không để huỷ dịch vụ.
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
+              Huỷ
+            </Button>
+            <Button colorScheme='red'  onClick={handleNoClick} ml={3}>
               Không
             </Button>
-            <Button colorScheme='red'  onClick={handleYesClick} ml={3}>
+            <Button colorScheme='green'  onClick={handleYesClick} ml={3}>
               Có
             </Button>
           </AlertDialogFooter>
