@@ -6,6 +6,7 @@ export const PATHS = {
   filterLandlord: "/filter/landlords",
   // ROOT
   users: "/users",
+  packages: "/packages",
   contactAuth: "/contact/authenticate",
   // ADMIN
   adminProfile: "/admin/me",

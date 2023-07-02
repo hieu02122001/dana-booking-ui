@@ -21,6 +21,8 @@ const LandlordAddSubsPage = () => {
   const [houseSelect, setHouseSelect] = useState("");
   const [rooms, setRooms] = useState([]);
   const [roomSelect, setRoomSelect] = useState("");
+  const [packages, setPackages] = useState([]);
+  const [packagesSelect, setPackagesSelect] = useState("");
   const [totalPrice, setTotalPrice] = useState();
   //
   const [value, setValue] = useState();
@@ -37,6 +39,14 @@ const LandlordAddSubsPage = () => {
       })
       .catch((err) => {
         setIsLoading(false);
+        console.log(err);
+      });
+    http
+      .get(PATHS.packages)
+      .then((res) => {
+        setPackages(res.data?.rows);
+      })
+      .catch((err) => {
         console.log(err);
       });
   }, []);
@@ -63,10 +73,16 @@ const LandlordAddSubsPage = () => {
     setTotalPrice(item.price)
     setValue({
       ...value,
-      roomId: item.id,
-      totalPrice: item.price
+      roomId: item.id
     });
   };
+  const handleClickPackage = (item) => {
+    setPackagesSelect(`${item.name}  -  ${item.days} ngày`);
+    setValue({
+      ...value,
+      packageId: item.id
+    })
+  }
   const handleSubmit = () => {
     setIsLoading(true);
     const addSub = {
@@ -124,7 +140,24 @@ const LandlordAddSubsPage = () => {
             </List>
           </Dropdown>
         </Field>
-        {isLoading ? (
+        <Field>
+          <Label>Gói:</Label>
+          <Dropdown>
+            <Select placeholder={packagesSelect || "Chọn một gói"}></Select>
+            <List>
+              {packages.length > 0 &&
+                packages.map((item) => (
+                  <Option
+                    key={item._id}
+                    onClick={() => handleClickPackage(item)}
+                  >
+                    {`${item.name}  -  ${item.days} ngày`}
+                  </Option>
+                ))}
+            </List>
+          </Dropdown>
+        </Field>
+        {/* {isLoading ? (
           <Loading></Loading>
         ) : (
           <div className="flex flex-col gap-2">
@@ -135,7 +168,7 @@ const LandlordAddSubsPage = () => {
               </div>
             )}
           </div>
-        )}
+        )} */}
       </div>
       <Button colorScheme="green" onClick={handleSubmit} isLoading={isLoading}>
         Xác nhận

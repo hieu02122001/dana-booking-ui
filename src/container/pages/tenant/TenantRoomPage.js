@@ -27,7 +27,6 @@ const TenantRoomPage = () => {
             price: item.price,
             images: item.images,
             description: item.description,
-            isRented: item.isRented,
             isAds: item.isAds,
             houseName: item?.house?.name,
             houseAddress: item?.house?.address,

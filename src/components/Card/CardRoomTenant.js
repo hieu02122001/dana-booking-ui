@@ -43,7 +43,7 @@ export default function CardRoomTenant({ data }) {
           <Stack mt="6" spacing="3">
             <Heading size="md">{`${data?.name}, ${data?.houseName}`}</Heading>
             <TruncatedText text={`${data?.houseAddress}`} wordLimit={35} />
-            <TruncatedText text={data?.description} wordLimit={75} />
+            <TruncatedText text={data?.description || ""} wordLimit={75} />
             <Text color="blue.600">
               {`${data?.price}đ`}
             </Text>
