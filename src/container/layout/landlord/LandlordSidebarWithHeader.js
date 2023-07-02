@@ -34,8 +34,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 const LinkItems = [
   { name: "Nhà trọ", icon: FiHome, url: PATHS.landlordHouses },
-  { name: "Thuê phòng", icon: FiKey, url: PATHS.landlordBookings },
   { name: "Đăng ký dịch vụ", icon: FiFolder, url: PATHS.landlordSubscriptions },
+  { name: "Thuê phòng", icon: FiKey, url: PATHS.landlordContact },
 ];
 
 export default function LandlordSidebarWithHeader({ children }) {
